@@ -13,9 +13,9 @@
 
     "baseUrl": ".",
     "paths": {
-      "@application/*": ["src/application/*"],
-      "@core/*": ["src/core/*"],
-      "@main/*": ["src/main/*"]
+      "@/application/*": ["src/application/*"],
+      "@/core/*": ["src/core/*"],
+      "@/main/*": ["src/main/*"]
     },
 
     /* Type Checking */

@@ -1,6 +1,7 @@
 import { z } from "zod";
-import { Schema } from "../../core/decorators/schema";
-import { Controller } from "../contracts/controller";
+
+import { Controller } from "@/application/contracts/controller";
+import { Schema } from "@/core/decorators/schema";
 
 const schema = z.object({
   name: z.string({ errorMap: () => ({ message: "Name is required" }) }).min(1),

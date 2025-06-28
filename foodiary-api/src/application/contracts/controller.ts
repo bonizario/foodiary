@@ -1,4 +1,4 @@
-import { getSchema } from "../../core/decorators/schema";
+import { getSchema } from "@/core/decorators/schema";
 
 export abstract class Controller<TBody = undefined> {
   protected abstract handle(request: Controller.Request): Promise<Controller.Response<TBody>>;
