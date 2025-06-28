@@ -15,8 +15,16 @@ export default defineConfig([
   },
   tseslint.configs.recommended,
   {
+    files: ["**/*.ts"],
     rules: {
       "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/consistent-type-imports": "error",
+    },
+  },
+  {
+    files: ["src/core/types/**/*.{ts,js}"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ]);
