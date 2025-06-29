@@ -16,12 +16,7 @@ build:
     configFile: ./esbuild.config.mjs
 
 functions:
-  hello:
-    handler: src/main/functions/hello.handler
-    events:
-      - httpApi:
-          path: /hello/{id}
-          method: POST
+  - ${file(./serverless/functions/auth.yml)}
 
 resources:
-  - ${file(./serverless/resources/user-pool.yaml)}
+  - ${file(./serverless/resources/user-pool.yml)}
