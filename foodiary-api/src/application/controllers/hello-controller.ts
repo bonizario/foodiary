@@ -1,8 +1,9 @@
 import { z } from "zod";
 
 import { Controller } from "@/application/contracts/controller";
+import { HelloUseCase } from "@/application/use-cases/hello-use-case";
+import { Injectable } from "@/core/decorators/injectable";
 import { Schema } from "@/core/decorators/schema";
-import { HelloUseCase } from "../use-cases/hello-use-case";
 
 const schema = z.object({
   name: z.string({ errorMap: () => ({ message: "Name is required" }) }).min(1),
@@ -11,6 +12,7 @@ const schema = z.object({
 
 type Body = z.output<typeof schema>;
 
+@Injectable()
 @Schema(schema)
 export class HelloController extends Controller<unknown> {
   constructor(private readonly helloUseCase: HelloUseCase) {

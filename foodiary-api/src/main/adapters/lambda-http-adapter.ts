@@ -8,6 +8,8 @@ import { lambdaBodyParser } from "@/main/utils/lambda-body-parser";
 import { lambdaErrorResponse } from "@/main/utils/lambda-error-response";
 
 export function lambdaHttpAdapter(controller: Controller<unknown>) {
+  // Log the ZodError constructor identity at the catch site
+  console.log("[lambda-http-adapter] ZodError constructor:", ZodError);
   return async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
     try {
       const body = lambdaBodyParser(event.body);
@@ -24,7 +26,20 @@ export function lambdaHttpAdapter(controller: Controller<unknown>) {
         statusCode: response.statusCode,
         body: response.body ? JSON.stringify(response.body) : undefined,
       };
-    } catch (error) {
+    } catch (err) {
+      const error = err as Error;
+      // Log the error's constructor at the catch site
+      console.log("[lambda-http-adapter] error.constructor:", error.constructor);
+      console.log(
+        "ERROR NAME:",
+        error.name,
+        "\n\n\nERROR MESSAGE:",
+        error.message,
+        "\n\n\nERROR STACK:",
+        error.stack,
+        "\n\n\nINSTANCEOF",
+        error instanceof ZodError,
+      );
       if (error instanceof ZodError) {
         return lambdaErrorResponse({
           code: ErrorCode.VALIDATION,

@@ -1,3 +1,6 @@
+import { Injectable } from "@/core/decorators/injectable";
+
+@Injectable()
 export class HelloUseCase {
   public async execute(input: HelloUseCase.Input): Promise<HelloUseCase.Output> {
     return {
