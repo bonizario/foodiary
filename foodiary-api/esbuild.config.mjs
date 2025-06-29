@@ -6,5 +6,9 @@ export default () => ({
   sourcemap: false,
   exclude: ["@aws-sdk/*"],
   external: ["@aws-sdk/*"],
-  plugins: [esbuildPluginTsc()],
+  plugins: [
+    esbuildPluginTsc({
+      forceEsm: true,
+    }),
+  ],
 });
