@@ -18,7 +18,6 @@ export default defineConfig([
     files: ["**/*.ts"],
     rules: {
       "@typescript-eslint/no-namespace": "off",
-      "@typescript-eslint/consistent-type-imports": "error",
     },
   },
   {

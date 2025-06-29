@@ -1,7 +1,19 @@
 import type { Constructor } from "@/core/types";
 
 export class Registry {
+  private static instance: Registry | undefined;
+
   private readonly providers = new Map<string, Registry.Provider>();
+
+  private constructor() {}
+
+  public static getInstance(): Registry {
+    if (!this.instance) {
+      this.instance = new Registry();
+    }
+
+    return this.instance;
+  }
 
   public register(impl: Constructor): void {
     const token = impl.name;
