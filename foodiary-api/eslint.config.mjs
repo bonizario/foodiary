@@ -21,7 +21,7 @@ export default defineConfig([
     },
   },
   {
-    files: ["src/core/types/**/*.{ts,js}"],
+    files: ["src/shared/types/**/*.{ts,js}"],
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
     },
