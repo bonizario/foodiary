@@ -27,9 +27,9 @@ export class Registry {
     this.providers.set(token, { impl, deps });
   }
 
-  public resolve<T extends object>(impl: Constructor<T>): InstanceType<Constructor<T>> {
+  public resolve<T extends object>(impl: Constructor<T>): T {
     const token = impl.name;
-    const provider = this.providers.get(token) as Registry.Provider<T>;
+    const provider = this.providers.get(token) as Registry.Provider<T> | undefined;
 
     if (!provider) {
       throw new Error(`Provider with token "${token}" is not registered`);
@@ -42,8 +42,8 @@ export class Registry {
 }
 
 export namespace Registry {
-  export interface Provider<T extends object = object> {
+  export type Provider<T extends object = object> = {
     impl: Constructor<T>;
     deps: Constructor[];
-  }
+  };
 }

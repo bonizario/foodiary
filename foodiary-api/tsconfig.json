@@ -15,6 +15,7 @@
     "paths": {
       "@/application/*": ["src/application/*"],
       "@/core/*": ["src/core/*"],
+      "@/infrastructure/*": ["src/infrastructure/*"],
       "@/main/*": ["src/main/*"]
     },
 

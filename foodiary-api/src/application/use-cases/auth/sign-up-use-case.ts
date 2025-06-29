@@ -1,9 +1,14 @@
 import { Injectable } from "@/core/decorators/injectable";
+import { AuthGateway } from "@/infrastructure/gateways/auth-gateway";
 
 @Injectable()
 export class SignUpUseCase {
+  constructor(private readonly authGateway: AuthGateway) {}
+
   public async execute(input: SignUpUseCase.Input): Promise<SignUpUseCase.Output> {
-    console.log("Executing SignUpUseCase with input:", input);
+    const { email, password } = input;
+
+    await this.authGateway.signUp({ email, password });
 
     return {
       accessToken: "mock-access-token",
@@ -13,13 +18,13 @@ export class SignUpUseCase {
 }
 
 export namespace SignUpUseCase {
-  export interface Input {
+  export type Input = {
     email: string;
     password: string;
-  }
+  };
 
-  export interface Output {
+  export type Output = {
     accessToken: string;
     refreshToken: string;
-  }
+  };
 }
