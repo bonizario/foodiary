@@ -12,6 +12,11 @@ provider:
 package:
   individually: true
 
+custom:
+  cognito:
+    UserPoolName: ${self:service}-${self:provider.stage}-user-pool
+    UserPoolClientName: ${self:service}-${self:provider.stage}-user-pool-client
+
 build:
   esbuild:
     configFile: ./esbuild.config.mjs

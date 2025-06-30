@@ -5,14 +5,14 @@ import { AuthGateway } from "@/infrastructure/gateways/auth-gateway";
 export class SignUpUseCase {
   constructor(private readonly authGateway: AuthGateway) {}
 
-  public async execute(input: SignUpUseCase.Input): Promise<SignUpUseCase.Output> {
-    const { email, password } = input;
-
+  public async execute({ email, password }: SignUpUseCase.Input): Promise<SignUpUseCase.Output> {
     await this.authGateway.signUp({ email, password });
 
+    const { accessToken, refreshToken } = await this.authGateway.signIn({ email, password });
+
     return {
-      accessToken: "mock-access-token",
-      refreshToken: "mock-refresh-token",
+      accessToken,
+      refreshToken,
     };
   }
 }
