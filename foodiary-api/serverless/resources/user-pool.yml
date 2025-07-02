@@ -35,3 +35,4 @@ Resources:
       RefreshTokenRotation:
         Feature: ENABLED
         RetryGracePeriodSeconds: 0
+      GenerateSecret: true

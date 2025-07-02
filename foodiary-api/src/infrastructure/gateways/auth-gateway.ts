@@ -1,3 +1,4 @@
+import { createHmac } from "node:crypto";
 import { format } from "node:util";
 
 import { InitiateAuthCommand, SignUpCommand } from "@aws-sdk/client-cognito-identity-provider";
@@ -10,27 +11,6 @@ import { AppConfig } from "@/shared/config/app-config";
 export class AuthGateway {
   constructor(private readonly appConfig: AppConfig) {}
 
-  public async signUp({
-    email,
-    password,
-  }: AuthGateway.SignUpParams): Promise<AuthGateway.SignUpResult> {
-    const command = new SignUpCommand({
-      ClientId: this.appConfig.auth.cognito.clientId,
-      Username: email,
-      Password: password,
-    });
-
-    const { UserSub: externalId } = await cognitoClient.send(command);
-
-    if (!externalId) {
-      throw new Error(format("Failed to sign up user with email %s", email));
-    }
-
-    return {
-      externalId,
-    };
-  }
-
   public async signIn({
     email,
     password,
@@ -41,6 +21,7 @@ export class AuthGateway {
       AuthParameters: {
         USERNAME: email,
         PASSWORD: password,
+        SECRET_HASH: this.getSecretHash(email),
       },
     });
 
@@ -56,6 +37,34 @@ export class AuthGateway {
       accessToken,
       refreshToken,
     };
+  }
+
+  public async signUp({
+    email,
+    password,
+  }: AuthGateway.SignUpParams): Promise<AuthGateway.SignUpResult> {
+    const command = new SignUpCommand({
+      ClientId: this.appConfig.auth.cognito.clientId,
+      Username: email,
+      Password: password,
+      SecretHash: this.getSecretHash(email),
+    });
+
+    const { UserSub: externalId } = await cognitoClient.send(command);
+
+    if (!externalId) {
+      throw new Error(format("Failed to sign up user with email %s", email));
+    }
+
+    return {
+      externalId,
+    };
+  }
+
+  private getSecretHash(email: string): string {
+    const { clientId, clientSecret } = this.appConfig.auth.cognito;
+
+    return createHmac("SHA256", clientSecret).update(`${email}${clientId}`).digest("base64");
   }
 }
 
