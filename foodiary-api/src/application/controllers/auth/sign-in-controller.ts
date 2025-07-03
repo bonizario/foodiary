@@ -1,16 +1,14 @@
 import { z } from "zod";
 
 import { Controller } from "@/application/contracts/controller";
-import { emailSchema, signUpPasswordSchema } from "@/application/controllers/auth/schemas";
-import { SignUpUseCase } from "@/application/use-cases/auth/sign-up-use-case";
+import { emailSchema, signInPasswordSchema } from "@/application/controllers/auth/schemas";
+import { SignInUseCase } from "@/application/use-cases/auth/sign-in-use-case";
 import { Injectable } from "@/core/decorators/injectable";
 import { Schema } from "@/core/decorators/schema";
 
 const schema = z.object({
-  account: z.object({
-    email: emailSchema,
-    password: signUpPasswordSchema,
-  }),
+  email: emailSchema,
+  password: signInPasswordSchema,
 });
 
 type RequestBody = z.output<typeof schema>;
@@ -22,18 +20,21 @@ type ResponseBody = {
 
 @Injectable()
 @Schema(schema)
-export class SignUpController extends Controller<ResponseBody> {
-  constructor(private readonly signUpUseCase: SignUpUseCase) {
+export class SignInController extends Controller<ResponseBody> {
+  constructor(private readonly signInUseCase: SignInUseCase) {
     super();
   }
 
   protected override async handle(
     request: Controller.Request<RequestBody>,
   ): Promise<Controller.Response<ResponseBody>> {
-    const { accessToken, refreshToken } = await this.signUpUseCase.execute(request.body.account);
+    const { accessToken, refreshToken } = await this.signInUseCase.execute({
+      email: request.body.email,
+      password: request.body.password,
+    });
 
     return {
-      statusCode: 201,
+      statusCode: 200,
       body: {
         accessToken,
         refreshToken,

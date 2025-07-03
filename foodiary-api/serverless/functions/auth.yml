@@ -1,3 +1,10 @@
+signIn:
+  handler: src/main/functions/auth/sign-in.handler
+  events:
+    - httpApi:
+        path: /auth/sign-in
+        method: POST
+
 signUp:
   handler: src/main/functions/auth/sign-up.handler
   events:
