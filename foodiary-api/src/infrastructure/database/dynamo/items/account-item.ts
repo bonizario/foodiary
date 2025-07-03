@@ -1,4 +1,4 @@
-import type { Account } from "@/application/entities/account";
+import { Account } from "@/application/entities/account";
 
 export class AccountItem {
   private readonly type = "Account";
@@ -27,6 +27,15 @@ export class AccountItem {
       email: account.email,
       externalId: account.externalId,
       createdAt: account.createdAt.toISOString(),
+    });
+  }
+
+  public static toEntity(accountItem: AccountItem.Document): Account {
+    return new Account({
+      id: accountItem.id,
+      email: accountItem.email,
+      externalId: accountItem.externalId,
+      createdAt: new Date(accountItem.createdAt),
     });
   }
 

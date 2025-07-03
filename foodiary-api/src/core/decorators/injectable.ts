@@ -1,5 +1,5 @@
 import { Registry } from "@/core/di/registry";
-import { Constructor } from "@/core/types/constructor";
+import { Constructor } from "@/shared/types/constructor";
 
 export function Injectable(): ClassDecorator {
   return (target) => {

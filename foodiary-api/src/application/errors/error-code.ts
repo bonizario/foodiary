@@ -1,4 +1,5 @@
 export const ErrorCode = {
+  EMAIL_ALREADY_IN_USE: "EMAIL_ALREADY_IN_USE",
   VALIDATION: "VALIDATION",
 
   // HTTP Errors
