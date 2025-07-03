@@ -9,7 +9,7 @@ import { AppConfig } from "@/shared/config/app-config";
 
 @Injectable()
 export class AuthGateway {
-  constructor(private readonly appConfig: AppConfig) {}
+  constructor(private readonly config: AppConfig) {}
 
   public async signIn({
     email,
@@ -17,7 +17,7 @@ export class AuthGateway {
   }: AuthGateway.SignInParams): Promise<AuthGateway.SignInResult> {
     const command = new InitiateAuthCommand({
       AuthFlow: "USER_PASSWORD_AUTH",
-      ClientId: this.appConfig.auth.cognito.clientId,
+      ClientId: this.config.auth.cognito.clientId,
       AuthParameters: {
         USERNAME: email,
         PASSWORD: password,
@@ -44,7 +44,7 @@ export class AuthGateway {
     password,
   }: AuthGateway.SignUpParams): Promise<AuthGateway.SignUpResult> {
     const command = new SignUpCommand({
-      ClientId: this.appConfig.auth.cognito.clientId,
+      ClientId: this.config.auth.cognito.clientId,
       Username: email,
       Password: password,
       SecretHash: this.getSecretHash(email),
@@ -62,7 +62,7 @@ export class AuthGateway {
   }
 
   private getSecretHash(email: string): string {
-    const { clientId, clientSecret } = this.appConfig.auth.cognito;
+    const { clientId, clientSecret } = this.config.auth.cognito;
 
     return createHmac("SHA256", clientSecret).update(`${email}${clientId}`).digest("base64");
   }

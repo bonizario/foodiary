@@ -14,8 +14,8 @@ export class AppConfig {
       },
     };
     this.db = {
-      dynamodb: {
-        mainTable: env.MAIN_TABLE_NAME,
+      dynamo: {
+        mainTable: env.DYNAMO_MAIN_TABLE,
       },
     };
   }
@@ -30,7 +30,7 @@ export namespace AppConfig {
   };
 
   export type Database = {
-    dynamodb: {
+    dynamo: {
       mainTable: string;
     };
   };
