@@ -10,6 +10,14 @@ provider:
   environment: ${file(./serverless/config/env.yml)}
   iam:
     role: ${file(./serverless/config/role.yml)}
+  httpApi:
+    authorizers:
+      CognitoAuthorizer:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: !GetAtt UserPool.ProviderURL
+        audience:
+          - !Ref UserPoolClient
 
 package:
   individually: true
