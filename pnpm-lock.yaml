@@ -8,9 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@expo-google-fonts/host-grotesk':
+        specifier: 0.4.1
+        version: 0.4.1
       expo:
         specifier: 57.0.20
         version: 57.0.20(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)(supports-color@8.1.1)(typescript@6.0.3)
+      expo-font:
+        specifier: 57.0.3
+        version: 57.0.3(expo@57.0.20)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)
       expo-status-bar:
         specifier: 57.0.1
         version: 57.0.1(expo@57.0.20)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)
@@ -26,7 +32,7 @@ importers:
         version: 19.2.18
       '@typescript-eslint/eslint-plugin':
         specifier: 8.69.0
-        version: 8.69.0
+        version: 8.69.0(@typescript-eslint/parser@8.69.0(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       eslint:
         specifier: 9.39.5
         version: 9.39.5(supports-color@8.1.1)
@@ -38,7 +44,7 @@ importers:
         version: 10.1.8(eslint@9.39.5(supports-color@8.1.1))
       eslint-plugin-import:
         specifier: 2.32.0
-        version: 2.32.0
+        version: 2.32.0(@typescript-eslint/parser@8.69.0(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.5(supports-color@8.1.1))(supports-color@8.1.1)
       eslint-plugin-prettier:
         specifier: 5.5.6
         version: 5.5.6(eslint-config-prettier@10.1.8(eslint@9.39.5(supports-color@8.1.1)))(eslint@9.39.5(supports-color@8.1.1))(prettier@3.9.6)
@@ -446,6 +452,9 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@expo-google-fonts/host-grotesk@0.4.1':
+    resolution: {integrity: sha512-pwac6+FOLyP0qumpl8EGVU5tsmXCWijWFimtjYnJW4RUFkngZZMjEWuxu1o0vcyEH8mPjGfL94ls5pW3RVK10g==}
 
   '@expo/cli@57.0.22':
     resolution: {integrity: sha512-MdToR0ZZ1yjfkqbP1jcA7viS9duMPGq/C+qQ/21dtq+en583Ghp+O11BP/wujHa9ZGRtXimzuKPZDpPresVE0g==}
@@ -3697,6 +3706,8 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
+
+  '@expo-google-fonts/host-grotesk@0.4.1': {}
 
   '@expo/cli@57.0.22(@expo/dom-webview@57.0.1)(expo-constants@57.0.17(expo@57.0.20)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(supports-color@8.1.1))(expo-font@57.0.3(expo@57.0.20)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3))(expo@57.0.20)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)(supports-color@8.1.1)(typescript@6.0.3)':
     dependencies:
