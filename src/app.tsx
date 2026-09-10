@@ -5,8 +5,9 @@ import {
   useFonts,
 } from "@expo-google-fonts/host-grotesk";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
+import { AppText } from "@/ui/components/app-text";
 import { theme } from "@/ui/styles/theme";
 
 export function App() {
@@ -22,9 +23,9 @@ export function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontFamily: theme.fontFamily.sans.semiBold }}>
-        Open up App.tsx to start working on your app!
-      </Text>
+      <AppText weight="medium" fontSize="3xl" style={{ textAlign: "right" }}>
+        Foodiary is an app for tracking your meals.
+      </AppText>
       <StatusBar style="auto" />
     </View>
   );
