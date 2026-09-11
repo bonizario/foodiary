@@ -46,7 +46,7 @@ const fontFamily = {
   sans: {
     regular: "HostGrotesk_400Regular",
     medium: "HostGrotesk_500Medium",
-    semiBold: "HostGrotesk_600SemiBold",
+    semibold: "HostGrotesk_600SemiBold",
   },
 } as const;
 

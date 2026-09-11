@@ -4,11 +4,9 @@ import {
   HostGrotesk_600SemiBold,
   useFonts,
 } from "@expo-google-fonts/host-grotesk";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { AppText } from "@/ui/components/app-text";
-import { theme } from "@/ui/styles/theme";
+import { Welcome } from "@/ui/screens/welcome";
 
 export function App() {
   const [isFontsLoaded] = useFonts({
@@ -22,20 +20,8 @@ export function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <AppText weight="medium" fontSize="3xl" style={{ textAlign: "right" }}>
-        Foodiary is an app for tracking your meals.
-      </AppText>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <Welcome />
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.lime[500],
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

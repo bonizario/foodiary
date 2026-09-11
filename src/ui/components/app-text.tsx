@@ -4,10 +4,10 @@ import { Text } from "react-native";
 import { theme } from "@/ui/styles/theme";
 
 type AppTextProps = ComponentProps<typeof Text> & {
-  color?: string | undefined;
-  fontFamily?: keyof typeof theme.fontFamily | undefined;
-  fontSize?: keyof typeof theme.fontSize | undefined;
-  weight?: keyof typeof theme.fontFamily.sans | undefined;
+  color?: string;
+  fontFamily?: keyof typeof theme.fontFamily;
+  fontSize?: keyof typeof theme.fontSize;
+  weight?: keyof typeof theme.fontFamily.sans;
 };
 
 export function AppText({

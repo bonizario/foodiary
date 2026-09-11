@@ -8,12 +8,14 @@ type Variant = {
   };
 };
 
+type Variants<TVariant extends Variant> = {
+  [K in keyof TVariant]: keyof TVariant[K];
+};
+
 type CreateVariantsParams<TVariant extends Variant> = {
   base?: Style;
   variants: TVariant;
-  defaultVariants: {
-    [K in keyof TVariant]: keyof TVariant[K];
-  };
+  defaultVariants: Variants<TVariant>;
 };
 
 export function createVariants<TVariant extends Variant>({
@@ -21,26 +23,21 @@ export function createVariants<TVariant extends Variant>({
   variants,
   defaultVariants,
 }: CreateVariantsParams<TVariant>) {
-  return (selectedVariants?: {
-    [K in keyof TVariant]?: keyof TVariant[K];
-  }) => {
-    let styles = { ...base };
+  return (selectedVariants?: Partial<Variants<TVariant>>) =>
+    Object.entries(variants).reduce<Style>(
+      (styles, [variant, variantStyles]) => {
+        const variantName =
+          selectedVariants?.[variant as keyof TVariant] ??
+          defaultVariants[variant as keyof TVariant];
 
-    for (const [variant, variantsStyles] of Object.entries(variants)) {
-      const variantName =
-        selectedVariants?.[variant] ?? defaultVariants[variant];
-      const selectedVariantStyles =
-        variantsStyles[variantName as keyof typeof variantsStyles];
-
-      styles = {
-        ...styles,
-        ...selectedVariantStyles,
-      };
-    }
-
-    return styles;
-  };
+        return {
+          ...styles,
+          ...variantStyles[variantName],
+        };
+      },
+      { ...base },
+    );
 }
 
 export type VariantProps<T extends ReturnType<typeof createVariants>> =
-  NonNullable<Parameters<T>[0]>;
+  NonNullable<Parameters<T>[number]>;
