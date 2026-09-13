@@ -19,6 +19,7 @@ module.exports = defineConfig([
           alphabetize: {
             caseInsensitive: true,
             order: "asc",
+            orderImportKind: "asc",
           },
           groups: [
             "builtin",
