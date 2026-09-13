@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react-native";
-import type { ComponentProps, ReactElement } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { ActivityIndicator, Platform, Pressable, View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
@@ -10,8 +10,9 @@ import {
 } from "@/ui/components/button/styles";
 import { theme } from "@/ui/styles/theme";
 
-type ButtonProps = ComponentProps<typeof Pressable> &
+type ButtonProps = Omit<ComponentProps<typeof Pressable>, "children"> &
   ButtonVariants & {
+    children?: ReactNode;
     isLoading?: boolean;
     leftIcon?: LucideIcon;
     rippleStyle?: "light" | "dark";
@@ -64,7 +65,7 @@ export function Button({
         ) : (
           <View style={styles.content}>
             {LeftIcon && <LeftIcon color={theme.colors.black[700]} size={20} />}
-            {childrenElement as ReactElement}
+            {childrenElement}
           </View>
         )}
       </Pressable>

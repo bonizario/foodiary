@@ -4,6 +4,7 @@ import {
   HostGrotesk_600SemiBold,
   useFonts,
 } from "@expo-google-fonts/host-grotesk";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Welcome } from "@/ui/screens/welcome";
@@ -20,8 +21,10 @@ export function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <Welcome />
-    </SafeAreaProvider>
+    <GestureHandlerRootView>
+      <SafeAreaProvider>
+        <Welcome />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
