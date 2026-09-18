@@ -1,6 +1,9 @@
+import { useNavigation } from "@react-navigation/native";
 import { useRef } from "react";
 import { ImageBackground, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import type { AuthStackNavigationProps } from "@/app/navigation/auth-stack";
 
 import welcomeBg from "@/ui/assets/welcome-bg/image.jpg";
 import { AppText } from "@/ui/components/app-text";
@@ -15,6 +18,12 @@ import { theme } from "@/ui/styles/theme";
 
 export function Welcome() {
   const signInBottomSheetRef = useRef<SignInBottomSheetRef>(null);
+
+  const navigation = useNavigation<AuthStackNavigationProps>();
+
+  const handleCreateAccount = () => {
+    navigation.navigate("Onboarding");
+  };
 
   return (
     <>
@@ -35,7 +44,7 @@ export function Welcome() {
               Controle sua dieta de forma simples
             </AppText>
             <View style={styles.ctaContainer}>
-              <Button>Criar conta</Button>
+              <Button onPress={handleCreateAccount}>Criar conta</Button>
               <View style={styles.signInContainer}>
                 <AppText color={theme.colors.white}>Já tem conta?</AppText>
                 <TouchableOpacity

@@ -2,17 +2,18 @@ allowBuilds:
   unrs-resolver: true
 packages:
   - "packages/*"
-packageConfigs:
-  saveExact: true
+saveExact: true
+overrides:
+  "@react-native/metro-config": 0.86.3
 minimumReleaseAgeExclude:
-  - '@expo/cli@57.0.24'
+  - '@expo/cli@57.0.24 || 57.0.26'
   - '@expo/fingerprint@0.20.13'
   - '@expo/prebuild-config@57.0.16'
-  - expo-asset@57.0.17
-  - expo-constants@57.0.18
+  - expo-asset@57.0.17 || 57.0.18
+  - expo-constants@57.0.18 || 57.0.19
   - expo-file-system@57.0.7
   - expo-font@57.0.4
   - expo-keep-awake@57.0.2
   - expo-modules-autolinking@57.0.13
   - expo-modules-core@57.0.18
-  - expo@57.0.22
+  - expo@57.0.22 || 57.0.24
