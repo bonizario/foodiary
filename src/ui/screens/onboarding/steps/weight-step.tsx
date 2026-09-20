@@ -28,7 +28,8 @@ export function WeightStep() {
       <Step.Content position="center">
         <FormGroup label="Peso (kg)" style={{ width: "100%" }}>
           <Input
-            inputMode="numeric"
+            autoFocus
+            inputMode="decimal"
             placeholder="80"
             formatter={formatDecimal}
             value={value}

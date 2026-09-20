@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   header: {
     gap: 8,
     paddingHorizontal: 24,
+    paddingBottom: 16,
   },
   title: {
     letterSpacing: -0.32,
@@ -18,9 +19,12 @@ export const styles = StyleSheet.create({
   subtitle: {
     textAlign: "center",
   },
-  content: {
+  contentScroll: {
     flex: 1,
-    paddingBottom: 34,
+  },
+  content: {
+    flexGrow: 1,
+    paddingBottom: 16,
     justifyContent: "flex-end",
     paddingHorizontal: 24,
   },
@@ -29,7 +33,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   footer: {
-    alignItems: "flex-end",
+    paddingTop: 16,
     paddingHorizontal: 24,
   },
 });

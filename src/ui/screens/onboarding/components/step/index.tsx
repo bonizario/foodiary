@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AppText } from "@/ui/components/app-text";
@@ -43,16 +43,34 @@ type StepContentProps = {
 
 function StepContent({ children, position = "end" }: StepContentProps) {
   return (
+    <ScrollView
+      style={styles.contentScroll}
+      contentContainerStyle={[
+        styles.content,
+        position === "center" && styles.contentCenter,
+      ]}
+      contentInset={{ bottom: 2 }}
+      scrollIndicatorInsets={{ bottom: 2 }}
+      keyboardShouldPersistTaps="handled"
+    >
+      {children}
+    </ScrollView>
+  );
+}
+
+type StepFooterProps = {
+  children: ReactNode;
+  align?: "start" | "end";
+};
+
+export function StepFooter({ children, align = "end" }: StepFooterProps) {
+  return (
     <View
-      style={[styles.content, position === "center" && styles.contentCenter]}
+      style={[styles.footer, align === "end" && { alignItems: "flex-end" }]}
     >
       {children}
     </View>
   );
-}
-
-function StepFooter({ children }: { children: ReactNode }) {
-  return <View style={styles.footer}>{children}</View>;
 }
 
 Step.Header = StepHeader;

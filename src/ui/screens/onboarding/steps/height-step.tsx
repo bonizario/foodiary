@@ -27,6 +27,7 @@ export function HeightStep() {
       <Step.Content position="center">
         <FormGroup label="Altura (cm)" style={{ width: "100%" }}>
           <Input
+            autoFocus
             inputMode="numeric"
             placeholder="175"
             formatter={formatDecimal}
