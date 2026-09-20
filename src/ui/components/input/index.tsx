@@ -16,15 +16,18 @@ type InputProps = BaseTextInputProps & {
   disabled?: boolean;
   component?: ComponentType<TextInputProps>;
   ref?: Ref<TextInput>;
+  formatter?: (value: string) => string;
 };
 
 export function Input({
   style,
-  onFocus,
   onBlur,
+  onChangeText,
+  onFocus,
   error,
   disabled,
   component: Component = TextInput,
+  formatter,
   ...props
 }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
@@ -39,6 +42,11 @@ export function Input({
     onBlur?.(event);
   };
 
+  const handleChangeText = (value: string) => {
+    const formattedValue = formatter?.(value) ?? value;
+    onChangeText?.(formattedValue);
+  };
+
   return (
     <Component
       style={[
@@ -51,6 +59,7 @@ export function Input({
       placeholderTextColor={theme.colors.gray[700]}
       onFocus={handleFocus}
       onBlur={handleBlur}
+      onChangeText={handleChangeText}
       readOnly={disabled}
       {...props}
     />

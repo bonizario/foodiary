@@ -10,7 +10,7 @@ import { Button } from "@/ui/components/button";
 import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
 import { theme } from "@/ui/styles/theme";
-import { formatDate } from "@/ui/styles/utils/formate-date";
+import { formatDate } from "@/ui/utils/format-date";
 
 export function BirthdateStep() {
   const [date, setDate] = useState(new Date());

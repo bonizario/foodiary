@@ -9,7 +9,7 @@ import { AppText } from "@/ui/components/app-text";
 import { styles } from "@/ui/components/date-input/styles";
 import { inputStyles } from "@/ui/components/input/styles";
 import { theme } from "@/ui/styles/theme";
-import { formatDate } from "@/ui/styles/utils/formate-date";
+import { formatDate } from "@/ui/utils/format-date";
 
 export type DateInputProps = {
   value: Date;

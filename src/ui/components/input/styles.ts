@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { theme } from "@/ui/styles/theme";
-import { createVariants } from "@/ui/styles/utils/create-variants";
+import { createVariants } from "@/ui/styles/theme/create-variants";
 
 export const inputStyles = createVariants({
   base: {

@@ -4,7 +4,7 @@ import { theme } from "@/ui/styles/theme";
 import {
   createVariants,
   type VariantProps,
-} from "@/ui/styles/utils/create-variants";
+} from "@/ui/styles/theme/create-variants";
 
 export const styles = StyleSheet.create({
   wrapper: {

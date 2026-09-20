@@ -1,24 +1,46 @@
-import { View } from "react-native";
+import { ArrowRightIcon } from "lucide-react-native";
+import { useState } from "react";
 
-import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
+import { FormGroup } from "@/ui/components/form-group";
+import { Input } from "@/ui/components/input";
+import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
-import type { OnboardingStackScreenProps } from "@/ui/screens/onboarding/onboarding-stack";
+import { theme } from "@/ui/styles/theme";
+import { formatDecimal } from "@/ui/utils/format-decimal";
 
-export function HeightStep(props: OnboardingStackScreenProps<"Height">) {
-  const { currentStepIndex, nextStep, previousStep } = useOnboarding();
+export function HeightStep() {
+  const [value, setValue] = useState(""); // TODO: remove after React Hook Form is introduced
+  const { nextStep } = useOnboarding();
+
+  const handleNextStep = async () => {
+    nextStep();
+  };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <AppText fontSize="3xl" weight="semibold">
-        HeightStep
-      </AppText>
+    <Step>
+      <Step.Header>
+        <Step.Title>Que é sua altura?</Step.Title>
+        <Step.Subtitle>Você pode inserir uma estimativa</Step.Subtitle>
+      </Step.Header>
 
-      <View>
-        <Button onPress={previousStep}>Voltar</Button>
-        <AppText>{currentStepIndex}</AppText>
-        <Button onPress={nextStep}>Avançar</Button>
-      </View>
-    </View>
+      <Step.Content position="center">
+        <FormGroup label="Altura (cm)" style={{ width: "100%" }}>
+          <Input
+            inputMode="numeric"
+            placeholder="175"
+            formatter={formatDecimal}
+            value={value}
+            onChangeText={setValue}
+          />
+        </FormGroup>
+      </Step.Content>
+
+      <Step.Footer>
+        <Button size="icon" onPress={handleNextStep}>
+          <ArrowRightIcon size={20} color={theme.colors.black[700]} />
+        </Button>
+      </Step.Footer>
+    </Step>
   );
 }
