@@ -1,5 +1,5 @@
 import DateTimePicker, {
-  type DateTimePickerEvent,
+  type DateTimePickerChangeEvent,
 } from "@react-native-community/datetimepicker";
 import { CalendarIcon } from "lucide-react-native";
 import { useState } from "react";
@@ -28,14 +28,15 @@ export function DateInput({
 }: DateInputProps) {
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
-  const handleSelectDate = (_event: DateTimePickerEvent, newDate?: Date) => {
+  const handleSelectDate = (
+    _event: DateTimePickerChangeEvent,
+    newDate: Date,
+  ) => {
     if (Platform.OS === "android") {
       setIsDatePickerVisible(false);
     }
 
-    if (newDate) {
-      onChange(newDate);
-    }
+    onChange(newDate);
   };
 
   const handlePress = () => {
@@ -86,7 +87,7 @@ export function DateInput({
             mode="date"
             display="spinner"
             value={value}
-            onChange={handleSelectDate}
+            onValueChange={handleSelectDate}
             style={styles.picker}
           />
         </View>
@@ -97,7 +98,8 @@ export function DateInput({
           mode="date"
           display="calendar"
           value={value}
-          onChange={handleSelectDate}
+          onValueChange={handleSelectDate}
+          onDismiss={() => setIsDatePickerVisible(false)}
         />
       )}
     </View>

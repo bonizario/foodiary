@@ -1,5 +1,5 @@
 import DateTimePicker, {
-  type DateTimePickerEvent,
+  type DateTimePickerChangeEvent,
 } from "@react-native-community/datetimepicker";
 import { ArrowRightIcon } from "lucide-react-native";
 import { useState } from "react";
@@ -18,11 +18,10 @@ export function BirthdateStep() {
 
   const { nextStep } = useOnboarding();
 
-  const handleSelectDate = (_event: DateTimePickerEvent, newDate?: Date) => {
-    if (!newDate) {
-      return;
-    }
-
+  const handleSelectDate = (
+    _event: DateTimePickerChangeEvent,
+    newDate: Date,
+  ) => {
     setDate(newDate);
 
     if (Platform.OS === "android") {
@@ -47,7 +46,8 @@ export function BirthdateStep() {
             mode="date"
             display={Platform.OS === "ios" ? "spinner" : "calendar"}
             value={date}
-            onChange={handleSelectDate}
+            onValueChange={handleSelectDate}
+            onDismiss={() => setIsDatePickerVisible(false)}
           />
         )}
 
