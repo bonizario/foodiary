@@ -1,18 +1,12 @@
 import { ArrowRightIcon } from "lucide-react-native";
 
+import { Goal } from "@/app/constants/goal";
+
 import { Button } from "@/ui/components/button";
 import { RadioGroup } from "@/ui/components/radio-group";
 import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
 import { theme } from "@/ui/styles/theme";
-
-const Goal = {
-  LOSE: "LOSE",
-  MAINTAIN: "MAINTAIN",
-  GAIN: "GAIN",
-} as const;
-
-type Goal = keyof typeof Goal;
 
 export function GoalStep() {
   const { nextStep } = useOnboarding();

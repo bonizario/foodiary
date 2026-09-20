@@ -1,17 +1,12 @@
 import { ArrowRightIcon } from "lucide-react-native";
 
+import { Gender } from "@/app/constants/gender";
+
 import { Button } from "@/ui/components/button";
 import { RadioGroup } from "@/ui/components/radio-group";
 import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
 import { theme } from "@/ui/styles/theme";
-
-const Gender = {
-  MALE: "MALE",
-  FEMALE: "FEMALE",
-} as const;
-
-type Gender = keyof typeof Gender;
 
 export function GenderStep() {
   const { nextStep } = useOnboarding();
