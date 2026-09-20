@@ -1,24 +1,54 @@
-import { View } from "react-native";
+import { ArrowRightIcon } from "lucide-react-native";
 
-import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
+import { RadioGroup } from "@/ui/components/radio-group";
+import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
-import type { OnboardingStackScreenProps } from "@/ui/screens/onboarding/onboarding-stack";
+import { theme } from "@/ui/styles/theme";
 
-export function GenderStep(props: OnboardingStackScreenProps<"Gender">) {
-  const { currentStepIndex, nextStep, previousStep } = useOnboarding();
+const Gender = {
+  MALE: "MALE",
+  FEMALE: "FEMALE",
+} as const;
+
+type Gender = keyof typeof Gender;
+
+export function GenderStep() {
+  const { nextStep } = useOnboarding();
+
+  const handleNextStep = async () => {
+    nextStep();
+  };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <AppText fontSize="3xl" weight="semibold">
-        GenderStep
-      </AppText>
+    <Step>
+      <Step.Header>
+        <Step.Title>Qual é seu gênero?</Step.Title>
+        <Step.Subtitle>Seu gênero influencia no tipo da dieta.</Step.Subtitle>
+      </Step.Header>
 
-      <View>
-        <Button onPress={previousStep}>Voltar</Button>
-        <AppText>{currentStepIndex}</AppText>
-        <Button onPress={nextStep}>Avançar</Button>
-      </View>
-    </View>
+      <Step.Content>
+        <RadioGroup
+          orientation="horizontal"
+          value={Gender.MALE}
+          onChangeValue={() => {}}
+        >
+          <RadioGroup.Item value={Gender.MALE}>
+            <RadioGroup.Icon>🧔‍♂️</RadioGroup.Icon>
+            <RadioGroup.Label>Masculino</RadioGroup.Label>
+          </RadioGroup.Item>
+          <RadioGroup.Item value={Gender.FEMALE}>
+            <RadioGroup.Icon>👱‍♀️</RadioGroup.Icon>
+            <RadioGroup.Label>Feminino</RadioGroup.Label>
+          </RadioGroup.Item>
+        </RadioGroup>
+      </Step.Content>
+
+      <Step.Footer>
+        <Button size="icon" onPress={handleNextStep}>
+          <ArrowRightIcon size={20} color={theme.colors.black[700]} />
+        </Button>
+      </Step.Footer>
+    </Step>
   );
 }
