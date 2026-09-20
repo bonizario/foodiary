@@ -1,0 +1,31 @@
+import { StyleSheet } from "react-native";
+
+import { theme } from "@/ui/styles/theme";
+
+export const styles = StyleSheet.create({
+  container: {
+    backgroundColor: theme.colors.white,
+    flex: 1,
+  },
+  header: {
+    gap: 8,
+    paddingHorizontal: 24,
+  },
+  title: {
+    letterSpacing: -0.32,
+    textAlign: "center",
+  },
+  subtitle: {
+    textAlign: "center",
+  },
+  content: {
+    flex: 1,
+    paddingBottom: 34,
+    justifyContent: "flex-end",
+    paddingHorizontal: 24,
+  },
+  footer: {
+    alignItems: "flex-end",
+    paddingHorizontal: 24,
+  },
+});

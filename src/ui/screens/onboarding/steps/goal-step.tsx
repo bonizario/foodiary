@@ -1,24 +1,30 @@
-import { View } from "react-native";
+import { ArrowRightIcon } from "lucide-react-native";
 
 import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
+import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
-import type { OnboardingStackScreenProps } from "@/ui/screens/onboarding/onboarding-stack";
+import { theme } from "@/ui/styles/theme";
 
-export function GoalStep(props: OnboardingStackScreenProps<"Goal">) {
-  const { currentStepIndex, nextStep, previousStep } = useOnboarding();
+export function GoalStep() {
+  const { nextStep } = useOnboarding();
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <AppText fontSize="3xl" weight="semibold">
-        GoalStep
-      </AppText>
+    <Step>
+      <Step.Header>
+        <Step.Title>Qual é seu objetivo?</Step.Title>
+        <Step.Subtitle>O que você pretende alcançar com a dieta?</Step.Subtitle>
+      </Step.Header>
 
-      <View>
-        <Button onPress={previousStep}>Voltar</Button>
-        <AppText>{currentStepIndex}</AppText>
-        <Button onPress={nextStep}>Avançar</Button>
-      </View>
-    </View>
+      <Step.Content>
+        <AppText>Hello Content..</AppText>
+      </Step.Content>
+
+      <Step.Footer>
+        <Button size="icon" onPress={nextStep}>
+          <ArrowRightIcon size={20} color={theme.colors.black[700]} />
+        </Button>
+      </Step.Footer>
+    </Step>
   );
 }
