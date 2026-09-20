@@ -36,8 +36,19 @@ function StepSubtitle({ children }: { children: string }) {
   );
 }
 
-function StepContent({ children }: { children: ReactNode }) {
-  return <View style={styles.content}>{children}</View>;
+type StepContentProps = {
+  children: React.ReactNode;
+  position?: "end" | "center";
+};
+
+function StepContent({ children, position = "end" }: StepContentProps) {
+  return (
+    <View
+      style={[styles.content, position === "center" && styles.contentCenter]}
+    >
+      {children}
+    </View>
+  );
 }
 
 function StepFooter({ children }: { children: ReactNode }) {
