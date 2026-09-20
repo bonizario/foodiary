@@ -6,9 +6,11 @@ module.exports = defineConfig([
   expoConfig,
   eslintPluginPrettierRecommended,
   {
+    files: ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
     rules: {
       "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/no-import-type-side-effects": "error",
+      "@typescript-eslint/no-redeclare": "off",
       "@typescript-eslint/no-unused-vars": "warn",
       "lines-between-class-members": ["error", "always"],
       "import/newline-after-import": ["error", { count: 1 }],

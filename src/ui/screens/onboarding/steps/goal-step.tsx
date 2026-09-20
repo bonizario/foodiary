@@ -1,13 +1,25 @@
 import { ArrowRightIcon } from "lucide-react-native";
 
-import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
+import { RadioGroup } from "@/ui/components/radio-group";
 import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
 import { theme } from "@/ui/styles/theme";
 
+const Goal = {
+  LOSE: "LOSE",
+  MAINTAIN: "MAINTAIN",
+  GAIN: "GAIN",
+} as const;
+
+type Goal = keyof typeof Goal;
+
 export function GoalStep() {
   const { nextStep } = useOnboarding();
+
+  const handleNextStep = async () => {
+    nextStep();
+  };
 
   return (
     <Step>
@@ -17,11 +29,24 @@ export function GoalStep() {
       </Step.Header>
 
       <Step.Content>
-        <AppText>Hello Content..</AppText>
+        <RadioGroup value={Goal.LOSE} onChangeValue={() => {}}>
+          <RadioGroup.Item value={Goal.LOSE}>
+            <RadioGroup.Icon>🥦</RadioGroup.Icon>
+            <RadioGroup.Label>Perder peso</RadioGroup.Label>
+          </RadioGroup.Item>
+          <RadioGroup.Item value={Goal.MAINTAIN}>
+            <RadioGroup.Icon>🍍</RadioGroup.Icon>
+            <RadioGroup.Label>Manter o peso</RadioGroup.Label>
+          </RadioGroup.Item>
+          <RadioGroup.Item value={Goal.GAIN}>
+            <RadioGroup.Icon>🥩</RadioGroup.Icon>
+            <RadioGroup.Label>Ganhar peso</RadioGroup.Label>
+          </RadioGroup.Item>
+        </RadioGroup>
       </Step.Content>
 
       <Step.Footer>
-        <Button size="icon" onPress={nextStep}>
+        <Button size="icon" onPress={handleNextStep}>
           <ArrowRightIcon size={20} color={theme.colors.black[700]} />
         </Button>
       </Step.Footer>
