@@ -7,6 +7,7 @@ import type { OnboardingStackScreenProps } from "@/ui/screens/onboarding/onboard
 
 export function GoalStep(props: OnboardingStackScreenProps<"Goal">) {
   const { currentStepIndex, nextStep, previousStep } = useOnboarding();
+
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <AppText fontSize="3xl" weight="semibold">
