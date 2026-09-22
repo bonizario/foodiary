@@ -1,20 +1,26 @@
 import { ArrowRightIcon } from "lucide-react-native";
-import { useState } from "react";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { Button } from "@/ui/components/button";
 import { FormGroup } from "@/ui/components/form-group";
 import { Input } from "@/ui/components/input";
 import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
+import type { OnboardingSchemaInput } from "@/ui/screens/onboarding/schema";
 import { theme } from "@/ui/styles/theme";
 import { formatDecimal } from "@/ui/utils/format-decimal";
 
 export function HeightStep() {
-  const [value, setValue] = useState(""); // TODO: remove after React Hook Form is introduced
+  const form = useFormContext<OnboardingSchemaInput>();
+
   const { nextStep } = useOnboarding();
 
   const handleNextStep = async () => {
-    nextStep();
+    const isValid = await form.trigger("height");
+
+    if (isValid) {
+      nextStep();
+    }
   };
 
   return (
@@ -25,16 +31,26 @@ export function HeightStep() {
       </Step.Header>
 
       <Step.Content position="center">
-        <FormGroup label="Altura (cm)" style={{ width: "100%" }}>
-          <Input
-            autoFocus
-            inputMode="numeric"
-            placeholder="175"
-            formatter={formatDecimal}
-            value={value}
-            onChangeText={setValue}
-          />
-        </FormGroup>
+        <Controller
+          control={form.control}
+          name="height"
+          render={({ field, fieldState }) => (
+            <FormGroup
+              label="Altura (cm)"
+              style={{ width: "100%" }}
+              error={fieldState.error?.message}
+            >
+              <Input
+                autoFocus
+                inputMode="numeric"
+                placeholder="175"
+                formatter={formatDecimal}
+                value={field.value}
+                onChangeText={field.onChange}
+              />
+            </FormGroup>
+          )}
+        />
       </Step.Content>
 
       <Step.Footer>

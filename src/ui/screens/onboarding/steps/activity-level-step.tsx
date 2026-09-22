@@ -1,4 +1,5 @@
 import { ArrowRightIcon } from "lucide-react-native";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { ActivityLevel } from "@/app/constants/activity-level";
 
@@ -6,13 +7,20 @@ import { Button } from "@/ui/components/button";
 import { RadioGroup } from "@/ui/components/radio-group";
 import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
+import type { OnboardingSchemaInput } from "@/ui/screens/onboarding/schema";
 import { theme } from "@/ui/styles/theme";
 
 export function ActivityLevelStep() {
+  const form = useFormContext<OnboardingSchemaInput>();
+
   const { nextStep } = useOnboarding();
 
   const handleNextStep = async () => {
-    nextStep();
+    const isValid = await form.trigger("activityLevel");
+
+    if (isValid) {
+      nextStep();
+    }
   };
 
   return (
@@ -23,57 +31,70 @@ export function ActivityLevelStep() {
       </Step.Header>
 
       <Step.Content>
-        <RadioGroup value={ActivityLevel.SEDENTARY} onChangeValue={() => {}}>
-          <RadioGroup.Item value={ActivityLevel.SEDENTARY}>
-            <RadioGroup.Icon>🛋️</RadioGroup.Icon>
-            <RadioGroup.ItemInfo>
-              <RadioGroup.Label>Sedentário</RadioGroup.Label>
-              <RadioGroup.Description>
-                Pouco ou nenhum exercício
-              </RadioGroup.Description>
-            </RadioGroup.ItemInfo>
-          </RadioGroup.Item>
+        <Controller
+          control={form.control}
+          name="activityLevel"
+          render={({ field, fieldState }) => (
+            <RadioGroup
+              value={field.value}
+              onChangeValue={(value) => {
+                field.onChange(value);
+                void form.trigger("activityLevel");
+              }}
+              error={!!fieldState.error}
+            >
+              <RadioGroup.Item value={ActivityLevel.SEDENTARY}>
+                <RadioGroup.Icon>🛋️</RadioGroup.Icon>
+                <RadioGroup.ItemInfo>
+                  <RadioGroup.Label>Sedentário</RadioGroup.Label>
+                  <RadioGroup.Description>
+                    Pouco ou nenhum exercício
+                  </RadioGroup.Description>
+                </RadioGroup.ItemInfo>
+              </RadioGroup.Item>
 
-          <RadioGroup.Item value={ActivityLevel.LIGHT}>
-            <RadioGroup.Icon>🥬</RadioGroup.Icon>
-            <RadioGroup.ItemInfo>
-              <RadioGroup.Label>Leve</RadioGroup.Label>
-              <RadioGroup.Description>
-                Exercício leve 1-2x por semana
-              </RadioGroup.Description>
-            </RadioGroup.ItemInfo>
-          </RadioGroup.Item>
+              <RadioGroup.Item value={ActivityLevel.LIGHT}>
+                <RadioGroup.Icon>🥬</RadioGroup.Icon>
+                <RadioGroup.ItemInfo>
+                  <RadioGroup.Label>Leve</RadioGroup.Label>
+                  <RadioGroup.Description>
+                    Exercício leve 1-2x por semana
+                  </RadioGroup.Description>
+                </RadioGroup.ItemInfo>
+              </RadioGroup.Item>
 
-          <RadioGroup.Item value={ActivityLevel.MODERATE}>
-            <RadioGroup.Icon>⚡</RadioGroup.Icon>
-            <RadioGroup.ItemInfo>
-              <RadioGroup.Label>Moderado</RadioGroup.Label>
-              <RadioGroup.Description>
-                Exercício moderado 3-5x por semana
-              </RadioGroup.Description>
-            </RadioGroup.ItemInfo>
-          </RadioGroup.Item>
+              <RadioGroup.Item value={ActivityLevel.MODERATE}>
+                <RadioGroup.Icon>⚡</RadioGroup.Icon>
+                <RadioGroup.ItemInfo>
+                  <RadioGroup.Label>Moderado</RadioGroup.Label>
+                  <RadioGroup.Description>
+                    Exercício moderado 3-5x por semana
+                  </RadioGroup.Description>
+                </RadioGroup.ItemInfo>
+              </RadioGroup.Item>
 
-          <RadioGroup.Item value={ActivityLevel.HEAVY}>
-            <RadioGroup.Icon>🔥</RadioGroup.Icon>
-            <RadioGroup.ItemInfo>
-              <RadioGroup.Label>Intenso</RadioGroup.Label>
-              <RadioGroup.Description>
-                Exercício intenso 6-7x por semana
-              </RadioGroup.Description>
-            </RadioGroup.ItemInfo>
-          </RadioGroup.Item>
+              <RadioGroup.Item value={ActivityLevel.HEAVY}>
+                <RadioGroup.Icon>🔥</RadioGroup.Icon>
+                <RadioGroup.ItemInfo>
+                  <RadioGroup.Label>Intenso</RadioGroup.Label>
+                  <RadioGroup.Description>
+                    Exercício intenso 6-7x por semana
+                  </RadioGroup.Description>
+                </RadioGroup.ItemInfo>
+              </RadioGroup.Item>
 
-          <RadioGroup.Item value={ActivityLevel.ATHLETE}>
-            <RadioGroup.Icon>🏋️</RadioGroup.Icon>
-            <RadioGroup.ItemInfo>
-              <RadioGroup.Label>Atleta</RadioGroup.Label>
-              <RadioGroup.Description>
-                Treino profissional diário
-              </RadioGroup.Description>
-            </RadioGroup.ItemInfo>
-          </RadioGroup.Item>
-        </RadioGroup>
+              <RadioGroup.Item value={ActivityLevel.ATHLETE}>
+                <RadioGroup.Icon>🏋️</RadioGroup.Icon>
+                <RadioGroup.ItemInfo>
+                  <RadioGroup.Label>Atleta</RadioGroup.Label>
+                  <RadioGroup.Description>
+                    Treino profissional diário
+                  </RadioGroup.Description>
+                </RadioGroup.ItemInfo>
+              </RadioGroup.Item>
+            </RadioGroup>
+          )}
+        />
       </Step.Content>
 
       <Step.Footer>
