@@ -2,7 +2,7 @@ import type { OnboardingStackParamList } from "@/ui/screens/onboarding/onboardin
 
 export const orderedSteps: (keyof OnboardingStackParamList)[] = [
   "Goal",
-  "Gender",
+  "BiologicalSex",
   "Birthdate",
   "Height",
   "Weight",

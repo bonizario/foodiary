@@ -11,16 +11,16 @@ import {
 } from "@react-navigation/native-stack";
 
 import { ActivityLevelStep } from "@/ui/screens/onboarding/steps/activity-level-step";
+import { BiologicalSexStep } from "@/ui/screens/onboarding/steps/biological-sex-step";
 import { BirthdateStep } from "@/ui/screens/onboarding/steps/birthdate-step";
 import { CreateAccountStep } from "@/ui/screens/onboarding/steps/create-account-step";
-import { GenderStep } from "@/ui/screens/onboarding/steps/gender-step";
 import { GoalStep } from "@/ui/screens/onboarding/steps/goal-step";
 import { HeightStep } from "@/ui/screens/onboarding/steps/height-step";
 import { WeightStep } from "@/ui/screens/onboarding/steps/weight-step";
 
 export type OnboardingStackParamList = {
   Goal: undefined;
-  Gender: undefined;
+  BiologicalSex: undefined;
   Birthdate: undefined;
   Height: undefined;
   Weight: undefined;
@@ -53,7 +53,7 @@ export function OnboardingStack() {
           initialRouteName="Goal"
         >
           <Stack.Screen name="Goal" component={GoalStep} />
-          <Stack.Screen name="Gender" component={GenderStep} />
+          <Stack.Screen name="BiologicalSex" component={BiologicalSexStep} />
           <Stack.Screen name="Birthdate" component={BirthdateStep} />
           <Stack.Screen name="Height" component={HeightStep} />
           <Stack.Screen name="Weight" component={WeightStep} />

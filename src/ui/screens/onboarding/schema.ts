@@ -1,13 +1,21 @@
 import { z } from "zod";
 
 import { ActivityLevel } from "@/app/constants/activity-level";
-import { Gender } from "@/app/constants/gender";
+import { BiologicalSex } from "@/app/constants/biological-sex";
 import { Goal } from "@/app/constants/goal";
-import { passwordSchema } from "@/app/schemas/password-schema";
+
+const passwordSchema = z
+  .string()
+  .min(8, "Senha deve ter no mínimo 8 caracteres")
+  .max(128, "Senha deve ter no máximo 128 caracteres")
+  .regex(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])/,
+    "Senha deve incluir letras maiúsculas, minúsculas, números e símbolos",
+  );
 
 export const onboardingSchema = z.object({
   goal: z.enum(Goal),
-  gender: z.enum(Gender),
+  biologicalSex: z.enum(BiologicalSex),
   birthdate: z.date(),
   height: z.coerce
     .number<string>({ error: "Informe uma altura válida" })
