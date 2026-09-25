@@ -1,22 +1,60 @@
+import { isAxiosError } from "axios";
 import { useRef } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { View, type TextInput } from "react-native";
+import { Alert, View, type TextInput } from "react-native";
+
+import { ErrorCode } from "@/app/constants/error-code";
+import { AuthService } from "@/app/services/auth-service";
 
 import { Button } from "@/ui/components/button";
 import { FormGroup } from "@/ui/components/form-group";
 import { Input } from "@/ui/components/input";
 import { Step } from "@/ui/screens/onboarding/components/step";
-import type { OnboardingSchemaInput } from "@/ui/screens/onboarding/schema";
+import type {
+  OnboardingSchemaInput,
+  OnboardingSchemaOutput,
+} from "@/ui/screens/onboarding/schema";
 
 export function CreateAccountStep() {
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
-  const form = useFormContext<OnboardingSchemaInput>();
+  const form = useFormContext<
+    OnboardingSchemaInput,
+    unknown,
+    OnboardingSchemaOutput
+  >();
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    console.log("Submitting create account form");
-    console.log(JSON.stringify(data, null, 2));
+    try {
+      const response = await AuthService.signUp({
+        account: {
+          email: data.account.email,
+          password: data.account.password,
+        },
+        profile: {
+          name: data.account.name,
+          goal: data.goal,
+          birthdate: data.birthdate,
+          biologicalSex: data.biologicalSex,
+          height: data.height,
+          weight: data.weight,
+          activityLevel: data.activityLevel,
+        },
+      });
+
+      console.log(response);
+    } catch (error) {
+      // TODO: improve error handling UX
+      if (
+        isAxiosError(error) &&
+        error.response?.data?.error?.code === ErrorCode.EMAIL_ALREADY_IN_USE
+      ) {
+        Alert.alert("Oops!", "Este e-mail já está em uso");
+        return;
+      }
+      Alert.alert("Oops!", "Ocorreu um erro ao criar a sua conta");
+    }
   });
 
   return (

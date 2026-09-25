@@ -47,7 +47,7 @@ export namespace AuthService {
       name: string;
       goal: Goal;
       biologicalSex: BiologicalSex;
-      birthdate: Date;
+      birthdate: string;
       height: number;
       weight: number;
       activityLevel: ActivityLevel;

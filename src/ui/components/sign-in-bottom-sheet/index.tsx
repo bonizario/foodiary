@@ -54,6 +54,7 @@ export function SignInBottomSheet({ ref }: SignInBottomSheetProps) {
                     textContentType="emailAddress"
                     value={field.value}
                     onChangeText={field.onChange}
+                    disabled={form.formState.isSubmitting}
                   />
                 </FormGroup>
               )}
@@ -77,11 +78,17 @@ export function SignInBottomSheet({ ref }: SignInBottomSheetProps) {
                     textContentType="password"
                     value={field.value}
                     onChangeText={field.onChange}
+                    disabled={form.formState.isSubmitting}
                   />
                 </FormGroup>
               )}
             />
-            <Button onPress={handleSubmit}>Entrar</Button>
+            <Button
+              onPress={handleSubmit}
+              isLoading={form.formState.isSubmitting}
+            >
+              Entrar
+            </Button>
           </View>
         </BottomSheetView>
       </BottomSheetModal>

@@ -4,6 +4,8 @@ import { ActivityLevel } from "@/app/constants/activity-level";
 import { BiologicalSex } from "@/app/constants/biological-sex";
 import { Goal } from "@/app/constants/goal";
 
+import { toLocalISODate } from "@/ui/utils/to-local-iso-date";
+
 const passwordSchema = z
   .string()
   .min(8, "Senha deve ter no mínimo 8 caracteres")
@@ -16,7 +18,7 @@ const passwordSchema = z
 export const onboardingSchema = z.object({
   goal: z.enum(Goal),
   biologicalSex: z.enum(BiologicalSex),
-  birthdate: z.date(),
+  birthdate: z.date().transform(toLocalISODate),
   height: z.coerce
     .number<string>({ error: "Informe uma altura válida" })
     .min(1)
