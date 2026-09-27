@@ -20,10 +20,7 @@ export function BirthdateStep() {
 
   const { nextStep } = useOnboarding();
 
-  const handleSelectDate = (
-    _event: DateTimePickerChangeEvent,
-    newDate: Date,
-  ) => {
+  const handleSelectDate = (_event: DateTimePickerChangeEvent, newDate: Date) => {
     form.setValue("birthdate", newDate);
 
     if (Platform.OS === "android") {
@@ -64,11 +61,7 @@ export function BirthdateStep() {
 
               {Platform.OS === "android" && (
                 <TouchableOpacity onPress={() => setIsDatePickerVisible(true)}>
-                  <AppText
-                    weight="semibold"
-                    fontSize="3xl"
-                    color={theme.colors.gray[700]}
-                  >
+                  <AppText weight="semibold" fontSize="3xl" color={theme.colors.gray[700]}>
                     {formatDate(field.value)}
                   </AppText>
                 </TouchableOpacity>

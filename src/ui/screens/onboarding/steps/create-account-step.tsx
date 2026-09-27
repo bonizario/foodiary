@@ -10,20 +10,13 @@ import { Button } from "@/ui/components/button";
 import { FormGroup } from "@/ui/components/form-group";
 import { Input } from "@/ui/components/input";
 import { Step } from "@/ui/screens/onboarding/components/step";
-import type {
-  OnboardingSchemaInput,
-  OnboardingSchemaOutput,
-} from "@/ui/screens/onboarding/schema";
+import type { OnboardingSchemaInput, OnboardingSchemaOutput } from "@/ui/screens/onboarding/schema";
 
 export function CreateAccountStep() {
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
-  const form = useFormContext<
-    OnboardingSchemaInput,
-    unknown,
-    OnboardingSchemaOutput
-  >();
+  const form = useFormContext<OnboardingSchemaInput, unknown, OnboardingSchemaOutput>();
 
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
@@ -122,9 +115,7 @@ export function CreateAccountStep() {
                   autoCorrect={false}
                   autoComplete="new-password"
                   returnKeyType="next"
-                  onSubmitEditing={() =>
-                    confirmPasswordInputRef.current?.focus()
-                  }
+                  onSubmitEditing={() => confirmPasswordInputRef.current?.focus()}
                   value={field.value}
                   onChangeText={field.onChange}
                   disabled={form.formState.isSubmitting}
@@ -137,10 +128,7 @@ export function CreateAccountStep() {
             control={form.control}
             name="account.confirmPassword"
             render={({ field, fieldState }) => (
-              <FormGroup
-                label="Confirmar Senha"
-                error={fieldState.error?.message}
-              >
+              <FormGroup label="Confirmar Senha" error={fieldState.error?.message}>
                 <Input
                   ref={confirmPasswordInputRef}
                   placeholder="Mínimo 8 caracteres"

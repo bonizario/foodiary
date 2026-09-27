@@ -47,9 +47,7 @@ export function ActivityLevelStep() {
                 <RadioGroup.Icon>🛋️</RadioGroup.Icon>
                 <RadioGroup.ItemInfo>
                   <RadioGroup.Label>Sedentário</RadioGroup.Label>
-                  <RadioGroup.Description>
-                    Pouco ou nenhum exercício
-                  </RadioGroup.Description>
+                  <RadioGroup.Description>Pouco ou nenhum exercício</RadioGroup.Description>
                 </RadioGroup.ItemInfo>
               </RadioGroup.Item>
 
@@ -57,9 +55,7 @@ export function ActivityLevelStep() {
                 <RadioGroup.Icon>🥬</RadioGroup.Icon>
                 <RadioGroup.ItemInfo>
                   <RadioGroup.Label>Leve</RadioGroup.Label>
-                  <RadioGroup.Description>
-                    Exercício leve 1-2x por semana
-                  </RadioGroup.Description>
+                  <RadioGroup.Description>Exercício leve 1-2x por semana</RadioGroup.Description>
                 </RadioGroup.ItemInfo>
               </RadioGroup.Item>
 
@@ -77,9 +73,7 @@ export function ActivityLevelStep() {
                 <RadioGroup.Icon>🔥</RadioGroup.Icon>
                 <RadioGroup.ItemInfo>
                   <RadioGroup.Label>Intenso</RadioGroup.Label>
-                  <RadioGroup.Description>
-                    Exercício intenso 6-7x por semana
-                  </RadioGroup.Description>
+                  <RadioGroup.Description>Exercício intenso 6-7x por semana</RadioGroup.Description>
                 </RadioGroup.ItemInfo>
               </RadioGroup.Item>
 
@@ -87,9 +81,7 @@ export function ActivityLevelStep() {
                 <RadioGroup.Icon>🏋️</RadioGroup.Icon>
                 <RadioGroup.ItemInfo>
                   <RadioGroup.Label>Atleta</RadioGroup.Label>
-                  <RadioGroup.Description>
-                    Treino profissional diário
-                  </RadioGroup.Description>
+                  <RadioGroup.Description>Treino profissional diário</RadioGroup.Description>
                 </RadioGroup.ItemInfo>
               </RadioGroup.Item>
             </RadioGroup>

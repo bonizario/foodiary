@@ -13,14 +13,15 @@ type AuthStackParamList = {
   Onboarding: undefined;
 };
 
-export type AuthStackNavigationProps =
-  NativeStackNavigationProp<AuthStackParamList>;
+export type AuthStackNavigationProps = NativeStackNavigationProp<AuthStackParamList>;
 
 export type AuthStackScreenProps<RouteName extends keyof AuthStackParamList> =
   NativeStackScreenProps<AuthStackParamList, RouteName>;
 
-export type AuthStackRouteProps<RouteName extends keyof AuthStackParamList> =
-  RouteProp<AuthStackParamList, RouteName>;
+export type AuthStackRouteProps<RouteName extends keyof AuthStackParamList> = RouteProp<
+  AuthStackParamList,
+  RouteName
+>;
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 

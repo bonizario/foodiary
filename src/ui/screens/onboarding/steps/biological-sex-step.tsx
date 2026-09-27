@@ -28,8 +28,7 @@ export function BiologicalSexStep() {
       <Step.Header>
         <Step.Title>Qual é o seu sexo biológico?</Step.Title>
         <Step.Subtitle>
-          Usamos essa informação para calcular suas necessidades calóricas com
-          mais precisão.
+          Usamos essa informação para calcular suas necessidades calóricas com mais precisão.
         </Step.Subtitle>
       </Step.Header>
 

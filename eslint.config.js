@@ -8,6 +8,12 @@ module.exports = defineConfig([
   {
     files: ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
     rules: {
+      "prettier/prettier": [
+        "error",
+        {
+          printWidth: 100,
+        },
+      ],
       "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/no-import-type-side-effects": "error",
       "@typescript-eslint/no-redeclare": "off",

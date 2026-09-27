@@ -19,14 +19,8 @@ export const onboardingSchema = z.object({
   goal: z.enum(Goal),
   biologicalSex: z.enum(BiologicalSex),
   birthdate: z.date().transform(toLocalISODate),
-  height: z.coerce
-    .number<string>({ error: "Informe uma altura válida" })
-    .min(1)
-    .max(999),
-  weight: z.coerce
-    .number<string>({ error: "Informe um peso válido" })
-    .min(1)
-    .max(999),
+  height: z.coerce.number<string>({ error: "Informe uma altura válida" }).min(1).max(999),
+  weight: z.coerce.number<string>({ error: "Informe um peso válido" }).min(1).max(999),
   activityLevel: z.enum(ActivityLevel),
   account: z
     .object({

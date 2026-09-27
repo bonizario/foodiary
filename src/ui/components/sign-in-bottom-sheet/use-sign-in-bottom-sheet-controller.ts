@@ -36,11 +36,7 @@ export function useSignInBottomSheetController(ref: Ref<SignInBottomSheetRef>) {
     }
   });
 
-  useImperativeHandle(
-    ref,
-    () => ({ open: () => bottomSheetModalRef.current?.present() }),
-    [],
-  );
+  useImperativeHandle(ref, () => ({ open: () => bottomSheetModalRef.current?.present() }), []);
 
   return {
     bottom,

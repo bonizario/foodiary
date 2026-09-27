@@ -9,11 +9,7 @@ import { theme } from "@/ui/styles/theme";
 export function Step({ children }: { children: ReactNode }) {
   const { bottom } = useSafeAreaInsets();
 
-  return (
-    <View style={[styles.container, { paddingBottom: bottom }]}>
-      {children}
-    </View>
-  );
+  return <View style={[styles.container, { paddingBottom: bottom }]}>{children}</View>;
 }
 
 function StepHeader({ children }: { children: ReactNode }) {
@@ -45,10 +41,7 @@ function StepContent({ children, position = "end" }: StepContentProps) {
   return (
     <ScrollView
       style={styles.contentScroll}
-      contentContainerStyle={[
-        styles.content,
-        position === "center" && styles.contentCenter,
-      ]}
+      contentContainerStyle={[styles.content, position === "center" && styles.contentCenter]}
       contentInset={{ bottom: 2 }}
       scrollIndicatorInsets={{ bottom: 2 }}
       keyboardShouldPersistTaps="handled"
@@ -65,11 +58,7 @@ type StepFooterProps = {
 
 export function StepFooter({ children, align = "end" }: StepFooterProps) {
   return (
-    <View
-      style={[styles.footer, align === "end" && { alignItems: "flex-end" }]}
-    >
-      {children}
-    </View>
+    <View style={[styles.footer, align === "end" && { alignItems: "flex-end" }]}>{children}</View>
   );
 }
 

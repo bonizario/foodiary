@@ -83,10 +83,7 @@ export function SignInBottomSheet({ ref }: SignInBottomSheetProps) {
                 </FormGroup>
               )}
             />
-            <Button
-              onPress={handleSubmit}
-              isLoading={form.formState.isSubmitting}
-            >
+            <Button onPress={handleSubmit} isLoading={form.formState.isSubmitting}>
               Entrar
             </Button>
           </View>

@@ -37,14 +37,8 @@ export function RadioGroup({
   const isHorizontal = orientation === "horizontal";
 
   return (
-    <RadioGroupContext.Provider
-      value={{ value, onChangeValue, isHorizontal, error }}
-    >
-      <View
-        style={[styles.container, isHorizontal && styles.containerHorizontal]}
-      >
-        {children}
-      </View>
+    <RadioGroupContext.Provider value={{ value, onChangeValue, isHorizontal, error }}>
+      <View style={[styles.container, isHorizontal && styles.containerHorizontal]}>{children}</View>
     </RadioGroupContext.Provider>
   );
 }
@@ -63,12 +57,7 @@ type RadioGroupItemProps = {
 const RadioGroupItemContext = createContext({ isSelected: false });
 
 function RadioGroupItem({ children, value }: RadioGroupItemProps) {
-  const {
-    value: selectedValue,
-    onChangeValue,
-    isHorizontal,
-    error,
-  } = use(RadioGroupContext);
+  const { value: selectedValue, onChangeValue, isHorizontal, error } = use(RadioGroupContext);
   const isSelected = value === selectedValue;
 
   return (
@@ -104,10 +93,7 @@ function RadioGroupLabel({ children }: { children: string }) {
   const { isHorizontal } = use(RadioGroupContext);
 
   return (
-    <AppText
-      weight="semibold"
-      style={[styles.label, isHorizontal && styles.textCenter]}
-    >
+    <AppText weight="semibold" style={[styles.label, isHorizontal && styles.textCenter]}>
       {children}
     </AppText>
   );

@@ -28,10 +28,7 @@ export function DateInput({
 }: DateInputProps) {
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
-  const handleSelectDate = (
-    _event: DateTimePickerChangeEvent,
-    newDate: Date,
-  ) => {
+  const handleSelectDate = (_event: DateTimePickerChangeEvent, newDate: Date) => {
     if (Platform.OS === "android") {
       setIsDatePickerVisible(false);
     }

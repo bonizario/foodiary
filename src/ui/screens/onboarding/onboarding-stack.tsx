@@ -28,30 +28,25 @@ export type OnboardingStackParamList = {
   CreateAccount: undefined;
 };
 
-export type OnboardingStackNavigationProps =
-  NativeStackNavigationProp<OnboardingStackParamList>;
+export type OnboardingStackNavigationProps = NativeStackNavigationProp<OnboardingStackParamList>;
 
-export type OnboardingStackScreenProps<
-  RouteName extends keyof OnboardingStackParamList,
-> = NativeStackScreenProps<OnboardingStackParamList, RouteName>;
+export type OnboardingStackScreenProps<RouteName extends keyof OnboardingStackParamList> =
+  NativeStackScreenProps<OnboardingStackParamList, RouteName>;
 
-export type OnboardingStackRouteProps<
-  RouteName extends keyof OnboardingStackParamList,
-> = RouteProp<OnboardingStackParamList, RouteName>;
+export type OnboardingStackRouteProps<RouteName extends keyof OnboardingStackParamList> = RouteProp<
+  OnboardingStackParamList,
+  RouteName
+>;
 
 const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 
-export const onboardingNavigation =
-  createNavigationContainerRef<OnboardingStackParamList>();
+export const onboardingNavigation = createNavigationContainerRef<OnboardingStackParamList>();
 
 export function OnboardingStack() {
   return (
     <NavigationIndependentTree>
       <NavigationContainer ref={onboardingNavigation}>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName="Goal"
-        >
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Goal">
           <Stack.Screen name="Goal" component={GoalStep} />
           <Stack.Screen name="BiologicalSex" component={BiologicalSexStep} />
           <Stack.Screen name="Birthdate" component={BirthdateStep} />

@@ -7,10 +7,7 @@ export class AuthService extends Service {
   public static async signIn(
     payload: AuthService.SignInPayload,
   ): Promise<AuthService.SignInResponse> {
-    const { data } = await this.client.post<AuthService.SignInResponse>(
-      "/auth/sign-in",
-      payload,
-    );
+    const { data } = await this.client.post<AuthService.SignInResponse>("/auth/sign-in", payload);
 
     return data;
   }
@@ -18,10 +15,7 @@ export class AuthService extends Service {
   public static async signUp(
     payload: AuthService.SignUpPayload,
   ): Promise<AuthService.SignUpResponse> {
-    const { data } = await this.client.post<AuthService.SignUpResponse>(
-      "/auth/sign-up",
-      payload,
-    );
+    const { data } = await this.client.post<AuthService.SignUpResponse>("/auth/sign-up", payload);
 
     return data;
   }

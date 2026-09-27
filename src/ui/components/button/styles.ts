@@ -1,10 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { theme } from "@/ui/styles/theme";
-import {
-  createVariants,
-  type VariantProps,
-} from "@/ui/styles/theme/create-variants";
+import { createVariants, type VariantProps } from "@/ui/styles/theme/create-variants";
 
 export const styles = StyleSheet.create({
   wrapper: {
