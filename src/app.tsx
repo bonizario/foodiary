@@ -7,6 +7,7 @@ import {
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import { AuthProvider } from "@/app/contexts/auth-context/auth-provider";
 import { Navigation } from "@/app/navigation";
 
 export function App() {
@@ -23,7 +24,9 @@ export function App() {
   return (
     <GestureHandlerRootView>
       <SafeAreaProvider>
-        <Navigation />
+        <AuthProvider>
+          <Navigation />
+        </AuthProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

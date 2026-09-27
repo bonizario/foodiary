@@ -4,7 +4,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { Alert, View, type TextInput } from "react-native";
 
 import { ErrorCode } from "@/app/constants/error-code";
-import { AuthService } from "@/app/services/auth-service";
+import { useAuth } from "@/app/contexts/auth-context/use-auth";
 
 import { Button } from "@/ui/components/button";
 import { FormGroup } from "@/ui/components/form-group";
@@ -16,11 +16,14 @@ export function CreateAccountStep() {
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
+
   const form = useFormContext<OnboardingSchemaInput, unknown, OnboardingSchemaOutput>();
+
+  const { signUp } = useAuth();
 
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
-      const response = await AuthService.signUp({
+      await signUp({
         account: {
           email: data.account.email,
           password: data.account.password,
@@ -35,8 +38,6 @@ export function CreateAccountStep() {
           activityLevel: data.activityLevel,
         },
       });
-
-      console.log(response);
     } catch (error) {
       // TODO: improve error handling UX
       if (
