@@ -19,8 +19,8 @@ export function useSignInBottomSheetController(ref: Ref<SignInBottomSheetRef>) {
   const form = useForm({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "gabrielbonizario@gmail.com",
+      password: "ABCabc123@#$",
     },
   });
 
