@@ -1,6 +1,6 @@
 import type { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useImperativeHandle, useRef, type Ref } from "react";
+import { useImperativeHandle, useRef, useState, type Ref } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, TextInput } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -11,6 +11,8 @@ import type { SignInBottomSheetRef } from "@/ui/components/sign-in-bottom-sheet"
 import { signInSchema } from "@/ui/components/sign-in-bottom-sheet/schema";
 
 export function useSignInBottomSheetController(ref: Ref<SignInBottomSheetRef>) {
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
@@ -28,8 +30,10 @@ export function useSignInBottomSheetController(ref: Ref<SignInBottomSheetRef>) {
 
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
+      setIsSubmitDisabled(true);
       await signIn(data);
     } catch {
+      setIsSubmitDisabled(false);
       // TODO: improve error handling UX
       Alert.alert("As credenciais informadas estão incorretas");
     }
@@ -42,6 +46,7 @@ export function useSignInBottomSheetController(ref: Ref<SignInBottomSheetRef>) {
     bottomSheetModalRef,
     form,
     handleSubmit,
+    isSubmitDisabled,
     passwordInputRef,
   };
 }

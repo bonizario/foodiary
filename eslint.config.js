@@ -14,7 +14,7 @@ module.exports = defineConfig([
           printWidth: 100,
         },
       ],
-      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/consistent-type-definitions": ["warn", "type"],
       "@typescript-eslint/no-import-type-side-effects": "error",
       "@typescript-eslint/no-redeclare": "off",
       "@typescript-eslint/no-unused-vars": "warn",

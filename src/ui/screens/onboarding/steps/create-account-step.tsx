@@ -1,5 +1,5 @@
 import { isAxiosError } from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Alert, View, type TextInput } from "react-native";
 
@@ -13,6 +13,8 @@ import { Step } from "@/ui/screens/onboarding/components/step";
 import type { OnboardingSchemaInput, OnboardingSchemaOutput } from "@/ui/screens/onboarding/schema";
 
 export function CreateAccountStep() {
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
@@ -23,6 +25,7 @@ export function CreateAccountStep() {
 
   const handleSubmit = form.handleSubmit(async (data) => {
     try {
+      setIsSubmitDisabled(true);
       await signUp({
         account: {
           email: data.account.email,
@@ -39,6 +42,7 @@ export function CreateAccountStep() {
         },
       });
     } catch (error) {
+      setIsSubmitDisabled(false);
       // TODO: improve error handling UX
       if (
         isAxiosError(error) &&
@@ -153,6 +157,7 @@ export function CreateAccountStep() {
           onPress={handleSubmit}
           style={{ width: "100%" }}
           isLoading={form.formState.isSubmitting}
+          disabled={isSubmitDisabled}
         >
           Criar conta
         </Button>

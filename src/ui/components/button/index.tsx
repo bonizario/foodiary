@@ -1,13 +1,13 @@
 import type { LucideIcon } from "lucide-react-native";
-import type { ComponentProps, ReactNode } from "react";
-import { ActivityIndicator, Platform, Pressable, View } from "react-native";
+import type { ReactNode } from "react";
+import { ActivityIndicator, Platform, Pressable, View, type PressableProps } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
 import { buttonStyles, styles, type ButtonVariants } from "@/ui/components/button/styles";
 import { theme } from "@/ui/styles/theme";
 
-type ButtonProps = Omit<ComponentProps<typeof Pressable>, "children"> &
-  ButtonVariants & {
+type ButtonProps = Omit<PressableProps, "children"> &
+  Omit<ButtonVariants, "disabled"> & {
     children?: ReactNode;
     isLoading?: boolean;
     leftIcon?: LucideIcon;
