@@ -1,6 +1,6 @@
 import type { OnboardingStackParamList } from "@/ui/screens/onboarding/onboarding-stack";
 
-export const orderedSteps: (keyof OnboardingStackParamList)[] = [
+export const Steps = [
   "Goal",
   "BiologicalSex",
   "Birthdate",
@@ -8,6 +8,4 @@ export const orderedSteps: (keyof OnboardingStackParamList)[] = [
   "Weight",
   "ActivityLevel",
   "CreateAccount",
-];
-
-export const TOTAL_STEPS = orderedSteps.length;
+] as const satisfies (keyof OnboardingStackParamList)[];

@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@/ui/components/button";
 import { styles } from "@/ui/screens/onboarding/components/onboarding-header/styles";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
-import { TOTAL_STEPS } from "@/ui/screens/onboarding/steps";
+import { Steps } from "@/ui/screens/onboarding/steps";
 import { theme } from "@/ui/styles/theme";
 
 export function OnboardingHeader() {
@@ -17,7 +17,7 @@ export function OnboardingHeader() {
 
   useEffect(() => {
     Animated.timing(widthAnimation, {
-      toValue: ((currentStepIndex + 1) * 100) / TOTAL_STEPS,
+      toValue: ((currentStepIndex + 1) * 100) / Steps.length,
       duration: 300,
       useNativeDriver: false,
     }).start();

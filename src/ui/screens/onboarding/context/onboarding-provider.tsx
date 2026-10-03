@@ -5,7 +5,7 @@ import type { AuthStackNavigationProps } from "@/app/navigation/auth-stack";
 
 import { OnboardingContext } from "@/ui/screens/onboarding/context";
 import { onboardingNavigation } from "@/ui/screens/onboarding/onboarding-stack";
-import { orderedSteps } from "@/ui/screens/onboarding/steps";
+import { Steps } from "@/ui/screens/onboarding/steps";
 
 type OnboardingProviderProps = {
   children: ReactNode;
@@ -17,7 +17,7 @@ export function OnboardingProvider({ children }: OnboardingProviderProps) {
 
   const nextStep = useCallback(() => {
     const nextStepIndex = currentStepIndex + 1;
-    const nextStep = orderedSteps[nextStepIndex];
+    const nextStep = Steps[nextStepIndex];
 
     if (!nextStep) {
       return;

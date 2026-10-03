@@ -1,9 +1,10 @@
 import type { ComponentProps } from "react";
-import { Text } from "react-native";
+import { Text, type TextStyle } from "react-native";
 
 import { theme } from "@/ui/styles/theme";
 
 type AppTextProps = ComponentProps<typeof Text> & {
+  align?: TextStyle["textAlign"];
   color?: string;
   fontFamily?: keyof typeof theme.fontFamily;
   fontSize?: keyof typeof theme.fontSize;
@@ -11,6 +12,7 @@ type AppTextProps = ComponentProps<typeof Text> & {
 };
 
 export function AppText({
+  align = "left",
   color = theme.colors.black[700],
   fontFamily = "sans",
   fontSize = "base",
@@ -25,6 +27,7 @@ export function AppText({
           color,
           fontFamily: theme.fontFamily[fontFamily][weight],
           fontSize: theme.fontSize[fontSize],
+          textAlign: align,
         },
         style,
       ]}
