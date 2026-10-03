@@ -1,4 +1,5 @@
 import type { BiologicalSex } from "@/app/constants/biological-sex";
+import type { Goal } from "@/app/constants/goal";
 import { Service } from "@/app/services/service";
 
 export class AccountsService extends Service {
@@ -23,6 +24,7 @@ export namespace AccountsService {
       biologicalSex: BiologicalSex;
       height: number;
       weight: number;
+      goal: Goal;
     };
     goal: {
       calories: number;

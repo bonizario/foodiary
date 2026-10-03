@@ -1,5 +1,10 @@
+import { useState } from "react";
 import { Modal, StatusBar, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
+import { Goal } from "@/app/constants/goal";
+import { useAuth } from "@/app/contexts/auth-context/use-auth";
+import { useAccount } from "@/app/hooks/queries/use-account";
 
 import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
@@ -7,9 +12,40 @@ import { GoalStats } from "@/ui/components/goal-stats";
 import { styles } from "@/ui/screens/onboarding/components/diet-plan-modal/styles";
 import { theme } from "@/ui/styles/theme";
 
+const goalDisplay = {
+  [Goal.LOSE]: {
+    icon: "🥦",
+    label: "Perder Peso",
+  },
+  [Goal.MAINTAIN]: {
+    icon: "🍍",
+    label: "Manter Peso",
+  },
+  [Goal.GAIN]: {
+    icon: "🥩",
+    label: "Ganhar Peso",
+  },
+} as const;
+
 export function DietPlanModal() {
+  const { signedUp } = useAuth();
+
+  const [visible, setVisible] = useState(signedUp);
+
+  const { data: account } = useAccount();
+
+  const handleClose = () => setVisible(false);
+
+  const goal = goalDisplay[account!.profile.goal];
+
   return (
-    <Modal visible transparent statusBarTranslucent animationType="fade">
+    <Modal
+      animationType="fade"
+      onRequestClose={handleClose}
+      statusBarTranslucent
+      transparent
+      visible={visible}
+    >
       <StatusBar animated barStyle="light-content" />
       <View style={styles.container}>
         <SafeAreaProvider>
@@ -17,7 +53,7 @@ export function DietPlanModal() {
             <View style={styles.content}>
               <View style={styles.header}>
                 <View style={styles.icon}>
-                  <AppText>🥦</AppText>
+                  <AppText>{goal.icon}</AppText>
                 </View>
                 <View style={styles.headerContent}>
                   <AppText
@@ -27,7 +63,7 @@ export function DietPlanModal() {
                     weight="semibold"
                     style={styles.title}
                   >
-                    Seu plano de dieta para <Text style={styles.titleHighlight}>Perder Peso</Text>{" "}
+                    Seu plano de dieta para <Text style={styles.titleHighlight}>{goal.label}</Text>{" "}
                     está pronto!
                   </AppText>
                   <AppText color={theme.colors.gray[600]} align="center">
@@ -39,15 +75,15 @@ export function DietPlanModal() {
 
               <View style={styles.body}>
                 <GoalStats
-                  calories={{ goal: 2000, current: 1500 }}
-                  proteins={{ goal: 150, current: 100 }}
-                  carbohydrates={{ goal: 250, current: 200 }}
-                  fats={{ goal: 70, current: 50 }}
+                  calories={{ goal: account!.goal.calories }}
+                  proteins={{ goal: account!.goal.proteins }}
+                  carbohydrates={{ goal: account!.goal.carbohydrates }}
+                  fats={{ goal: account!.goal.fats }}
                 />
               </View>
             </View>
             <View style={styles.footer}>
-              <Button>Começar meu plano</Button>
+              <Button onPress={handleClose}>Começar meu plano</Button>
             </View>
           </SafeAreaView>
         </SafeAreaProvider>

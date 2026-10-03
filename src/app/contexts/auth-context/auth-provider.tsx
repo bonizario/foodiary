@@ -13,6 +13,7 @@ void SplashScreen.preventAutoHideAsync();
 
 export function AuthProvider({ children }: { children: ReactElement }) {
   const [isReady, setIsReady] = useState(false);
+  const [signedUp, setSignedUp] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -70,6 +71,7 @@ export function AuthProvider({ children }: { children: ReactElement }) {
       const tokens = await AuthService.signUp(payload);
       await AuthTokensManager.save(tokens);
       await setupAuth(tokens);
+      setSignedUp(true);
     },
     [setupAuth],
   );
@@ -95,7 +97,15 @@ export function AuthProvider({ children }: { children: ReactElement }) {
   }
 
   return (
-    <AuthContext.Provider value={{ signedIn: !!account, signIn, signUp, signOut }}>
+    <AuthContext.Provider
+      value={{
+        signedIn: !!account,
+        signedUp,
+        signIn,
+        signUp,
+        signOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
