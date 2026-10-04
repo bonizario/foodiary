@@ -12,7 +12,8 @@ import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
 import type { OnboardingSchemaInput } from "@/ui/screens/onboarding/schema";
 import { theme } from "@/ui/styles/theme";
-import { formatDate } from "@/ui/utils/format-date";
+
+import { formatDate } from "@/shared/functions/format-date";
 
 export function BirthdateStep() {
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(true);

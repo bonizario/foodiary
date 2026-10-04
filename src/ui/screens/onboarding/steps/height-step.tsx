@@ -8,7 +8,8 @@ import { Step } from "@/ui/screens/onboarding/components/step";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
 import type { OnboardingSchemaInput } from "@/ui/screens/onboarding/schema";
 import { theme } from "@/ui/styles/theme";
-import { formatDecimal } from "@/ui/utils/format-decimal";
+
+import { formatDecimal } from "@/shared/functions/format-decimal";
 
 export function HeightStep() {
   const form = useFormContext<OnboardingSchemaInput>();

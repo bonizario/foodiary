@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.lime[400],
   },
   content: {
-    flex: 1,
+    minHeight: "100%",
     backgroundColor: theme.colors.white,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,

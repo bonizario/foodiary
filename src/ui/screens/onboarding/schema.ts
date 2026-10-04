@@ -4,7 +4,7 @@ import { ActivityLevel } from "@/app/constants/activity-level";
 import { BiologicalSex } from "@/app/constants/biological-sex";
 import { Goal } from "@/app/constants/goal";
 
-import { toLocalISODate } from "@/ui/utils/to-local-iso-date";
+import { toLocalDateString } from "@/shared/functions/to-local-date-string";
 
 const passwordSchema = z
   .string()
@@ -18,7 +18,7 @@ const passwordSchema = z
 export const onboardingSchema = z.object({
   goal: z.enum(Goal),
   biologicalSex: z.enum(BiologicalSex),
-  birthdate: z.date().transform(toLocalISODate),
+  birthdate: z.date().transform(toLocalDateString),
   height: z.coerce.number<string>({ error: "Informe uma altura válida" }).min(1).max(999),
   weight: z.coerce.number<string>({ error: "Informe um peso válido" }).min(1).max(999),
   activityLevel: z.enum(ActivityLevel),

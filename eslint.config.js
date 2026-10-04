@@ -46,6 +46,11 @@ module.exports = defineConfig([
               group: "internal",
               position: "before",
             },
+            {
+              pattern: "@/shared/**",
+              group: "internal",
+              position: "before",
+            },
           ],
           distinctGroup: true,
           pathGroupsExcludedImportTypes: ["object", "type"],

@@ -15,12 +15,13 @@ export const styles = StyleSheet.create({
   divider: {
     backgroundColor: theme.colors.gray[200],
     width: "100%",
-    height: 2,
+    height: 1,
     borderRadius: 1,
     marginTop: 12,
     marginBottom: 24,
   },
   mealsLabel: {
     letterSpacing: 1.28,
+    paddingHorizontal: 12,
   },
 });
