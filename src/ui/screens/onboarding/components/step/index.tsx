@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 import { ScrollView, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AppText } from "@/ui/components/app-text";
+import { useSafeArea } from "@/ui/hooks/use-safe-area";
 import { styles } from "@/ui/screens/onboarding/components/step/styles";
 import { theme } from "@/ui/styles/theme";
 
 export function Step({ children }: { children: ReactNode }) {
-  const { bottom } = useSafeAreaInsets();
+  const { bottom } = useSafeArea();
 
   return <View style={[styles.container, { paddingBottom: bottom }]}>{children}</View>;
 }

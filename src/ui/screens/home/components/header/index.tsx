@@ -9,6 +9,7 @@ import { useHomeContext } from "@/ui/screens/home/context/use-home-context";
 
 export function Header() {
   const { isFetching } = useHomeContext();
+
   return (
     <View>
       <UserHeader />
@@ -17,10 +18,7 @@ export function Header() {
         <CurrentGoal />
         <View>
           <View style={styles.divider} />
-          <AppText
-            weight="medium"
-            style={[styles.mealsLabel, { opacity: isFetching ? 0.5 : 1 }]}
-          >
+          <AppText weight="medium" style={[styles.mealsLabel, { opacity: isFetching ? 0.5 : 1 }]}>
             REFEIÇÕES
           </AppText>
         </View>

@@ -1,16 +1,16 @@
 import { ChevronLeftIcon } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { Animated, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Button } from "@/ui/components/button";
+import { useSafeArea } from "@/ui/hooks/use-safe-area";
 import { styles } from "@/ui/screens/onboarding/components/onboarding-header/styles";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
 import { Steps } from "@/ui/screens/onboarding/steps";
 import { theme } from "@/ui/styles/theme";
 
 export function OnboardingHeader() {
-  const { top } = useSafeAreaInsets();
+  const { top } = useSafeArea();
   const { currentStepIndex, previousStep } = useOnboarding();
 
   const [widthAnimation] = useState(() => new Animated.Value(0));
@@ -24,7 +24,7 @@ export function OnboardingHeader() {
   }, [currentStepIndex, widthAnimation]);
 
   return (
-    <View style={[styles.container, { marginTop: top }]}>
+    <View style={[styles.container, { paddingTop: top }]}>
       <Button size="icon" variant="ghost" onPress={previousStep}>
         <ChevronLeftIcon size={20} color={theme.colors.black[700]} />
       </Button>

@@ -3,12 +3,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useImperativeHandle, useRef, useState, type Ref } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, TextInput } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useAuth } from "@/app/contexts/auth-context/use-auth";
 
 import type { SignInBottomSheetRef } from "@/ui/components/sign-in-bottom-sheet";
 import { signInSchema } from "@/ui/components/sign-in-bottom-sheet/schema";
+import { useSafeArea } from "@/ui/hooks/use-safe-area";
 
 export function useSignInBottomSheetController(ref: Ref<SignInBottomSheetRef>) {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
@@ -16,7 +16,7 @@ export function useSignInBottomSheetController(ref: Ref<SignInBottomSheetRef>) {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
-  const { bottom } = useSafeAreaInsets();
+  const { bottom } = useSafeArea();
 
   const form = useForm({
     resolver: zodResolver(signInSchema),

@@ -6,9 +6,10 @@ export const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flexDirection: "row",
-    paddingHorizontal: 16,
     gap: 16,
-    paddingBottom: 32,
+    paddingTop: 12,
+    paddingBottom: 28,
+    paddingHorizontal: 16,
     backgroundColor: theme.colors.lime[400],
   },
   userInfo: {

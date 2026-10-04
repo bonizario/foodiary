@@ -1,4 +1,4 @@
-import { FlatList, RefreshControl, View } from "react-native";
+import { FlatList, Platform, RefreshControl, View } from "react-native";
 
 import { EmptyState } from "@/ui/screens/home/components/empty-state";
 import { FullScreenLoader } from "@/ui/screens/home/components/full-screen-loader";
@@ -30,7 +30,7 @@ export function Home() {
   }
 
   return (
-    <View style={[styles.container, { paddingTop: top }]}>
+    <View style={[styles.container, { paddingTop: Platform.OS === "ios" ? top - 8 : top }]}>
       <DietPlanModal />
 
       <HomeProvider

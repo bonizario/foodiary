@@ -1,12 +1,13 @@
 import { useCallback, useState } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useMeals } from "@/app/hooks/queries/use-meals";
+
+import { useSafeArea } from "@/ui/hooks/use-safe-area";
 
 export function useHomeController() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const { top, bottom } = useSafeAreaInsets();
+  const { top, bottom } = useSafeArea();
 
   const { data: meals = [], isLoading, isFetching, refetch: refetchMeals } = useMeals(currentDate);
 
