@@ -9,8 +9,9 @@ import { useAccount } from "@/app/hooks/queries/use-account";
 import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
 import { GoalStats } from "@/ui/components/goal-stats";
-import { styles } from "@/ui/screens/onboarding/components/diet-plan-modal/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 const goalDisplay = {
   [Goal.LOSE]: {

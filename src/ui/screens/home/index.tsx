@@ -7,10 +7,11 @@ import { Header } from "@/ui/screens/home/components/header";
 import { ItemSeparator } from "@/ui/screens/home/components/item-separator";
 import { MealCard } from "@/ui/screens/home/components/meal-card";
 import { HomeProvider } from "@/ui/screens/home/context/home-provider";
-import { styles } from "@/ui/screens/home/styles";
 import { useHomeController } from "@/ui/screens/home/use-home-controller";
 import { DietPlanModal } from "@/ui/screens/onboarding/components/diet-plan-modal";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 export function Home() {
   const {

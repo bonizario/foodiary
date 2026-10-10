@@ -7,8 +7,9 @@ import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
 import { CreateMealOptions } from "@/ui/components/create-meal-options";
 import { useSafeArea } from "@/ui/hooks/use-safe-area";
-import { styles } from "@/ui/screens/home/components/fab/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 export function Fab() {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);

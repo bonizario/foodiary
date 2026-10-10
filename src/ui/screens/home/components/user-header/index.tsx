@@ -5,8 +5,9 @@ import { useAccount } from "@/app/hooks/queries/use-account";
 
 import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
-import { styles } from "@/ui/screens/home/components/user-header/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 export function UserHeader() {
   const { data: account } = useAccount();

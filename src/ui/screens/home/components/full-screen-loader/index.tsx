@@ -1,8 +1,9 @@
 import { ActivityIndicator, View } from "react-native";
 
 import { Logo } from "@/ui/components/logo";
-import { styles } from "@/ui/screens/home/components/full-screen-loader/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 export function FullScreenLoader() {
   return (

@@ -2,8 +2,9 @@ import { cloneElement, type ReactElement } from "react";
 import { View, type StyleProp, type ViewStyle } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
-import { styles } from "@/ui/components/form-group/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 type FormGroupProps = {
   label: string;

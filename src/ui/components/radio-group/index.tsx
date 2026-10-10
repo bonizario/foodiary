@@ -2,8 +2,9 @@ import { createContext, use, type ReactNode } from "react";
 import { TouchableOpacity, View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
-import { styles } from "@/ui/components/radio-group/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 type RadioGroupContextValue = {
   value: string;

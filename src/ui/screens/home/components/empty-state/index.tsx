@@ -2,9 +2,10 @@ import { View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
 import { CreateMealOptions } from "@/ui/components/create-meal-options";
-import { styles } from "@/ui/screens/home/components/empty-state/styles";
 import { useHomeContext } from "@/ui/screens/home/context/use-home-context";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 export function EmptyState() {
   const { isFetching } = useHomeContext();

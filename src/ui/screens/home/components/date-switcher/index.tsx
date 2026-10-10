@@ -3,9 +3,10 @@ import { View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
-import { styles } from "@/ui/screens/home/components/date-switcher/styles";
 import { useHomeContext } from "@/ui/screens/home/context/use-home-context";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 export function DateSwitcher() {
   const { currentDate, isFetching, previousDay, nextDay } = useHomeContext();

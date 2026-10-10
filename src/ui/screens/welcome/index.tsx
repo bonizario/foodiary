@@ -10,8 +10,9 @@ import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
 import { Logo } from "@/ui/components/logo";
 import { SignInBottomSheet, SignInBottomSheetRef } from "@/ui/components/sign-in-bottom-sheet";
-import { styles } from "@/ui/screens/welcome/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 export function Welcome() {
   const signInBottomSheetRef = useRef<SignInBottomSheetRef>(null);

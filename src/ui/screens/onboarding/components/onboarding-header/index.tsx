@@ -4,10 +4,11 @@ import { Animated, View } from "react-native";
 
 import { Button } from "@/ui/components/button";
 import { useSafeArea } from "@/ui/hooks/use-safe-area";
-import { styles } from "@/ui/screens/onboarding/components/onboarding-header/styles";
 import { useOnboarding } from "@/ui/screens/onboarding/context/use-onboarding";
 import { Steps } from "@/ui/screens/onboarding/steps";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 export function OnboardingHeader() {
   const { top } = useSafeArea();

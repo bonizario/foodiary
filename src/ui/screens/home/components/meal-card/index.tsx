@@ -6,9 +6,10 @@ import type { SimplifiedMeal } from "@/app/constants/meal";
 import type { AppStackNavigationProps } from "@/app/navigation/app-stack";
 
 import { AppText } from "@/ui/components/app-text";
-import { styles } from "@/ui/screens/home/components/meal-card/styles";
 import { useHomeContext } from "@/ui/screens/home/context/use-home-context";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 type MealCardProps = {
   meal: SimplifiedMeal;

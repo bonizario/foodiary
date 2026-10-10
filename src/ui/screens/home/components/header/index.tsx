@@ -3,9 +3,10 @@ import { View } from "react-native";
 import { AppText } from "@/ui/components/app-text";
 import { CurrentGoal } from "@/ui/screens/home/components/current-goal";
 import { DateSwitcher } from "@/ui/screens/home/components/date-switcher";
-import { styles } from "@/ui/screens/home/components/header/styles";
 import { UserHeader } from "@/ui/screens/home/components/user-header";
 import { useHomeContext } from "@/ui/screens/home/context/use-home-context";
+
+import { styles } from "./styles";
 
 export function Header() {
   const { isFetching } = useHomeContext();

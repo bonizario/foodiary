@@ -3,8 +3,9 @@ import { View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
 import { Arc } from "@/ui/components/goal-stats/arc";
-import { styles } from "@/ui/components/goal-stats/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 type MacroProgress = {
   goal: number;

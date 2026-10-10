@@ -3,8 +3,9 @@ import { ScrollView, View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
 import { useSafeArea } from "@/ui/hooks/use-safe-area";
-import { styles } from "@/ui/screens/onboarding/components/step/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
 
 export function Step({ children }: { children: ReactNode }) {
   const { bottom } = useSafeArea();

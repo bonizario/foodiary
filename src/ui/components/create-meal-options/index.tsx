@@ -3,8 +3,17 @@ import { useState } from "react";
 import { Platform, Pressable, View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
-import { styles } from "@/ui/components/create-meal-options/styles";
+import { AudioModal } from "@/ui/components/audio-modal";
 import { theme } from "@/ui/styles/theme";
+
+import { styles } from "./styles";
+
+const Modal = {
+  AUDIO: "AUDIO",
+  PICTURE: "PICTURE",
+} as const;
+
+type Modal = (typeof Modal)[keyof typeof Modal];
 
 type CreateMealOptionsProps = {
   disabled?: boolean;
@@ -12,9 +21,9 @@ type CreateMealOptionsProps = {
 };
 
 export function CreateMealOptions({ disabled = false, onCreate }: CreateMealOptionsProps) {
-  const [currentVisibleModal, setCurrentVisibleModal] = useState<null | "audio" | "picture">(null);
+  const [currentVisibleModal, setCurrentVisibleModal] = useState<Modal | null>("AUDIO");
 
-  function handleOpenModal(modal: "audio" | "picture") {
+  function handleOpenModal(modal: Modal) {
     setCurrentVisibleModal(modal);
   }
 
@@ -24,12 +33,12 @@ export function CreateMealOptions({ disabled = false, onCreate }: CreateMealOpti
 
   return (
     <View style={styles.container}>
-      {/* <AudioModal
-        visible={currentVisibleModal === 'audio'}
+      <AudioModal
+        visible={currentVisibleModal === Modal.AUDIO}
         onClose={handleCloseModal}
         onCreate={onCreate}
       />
-      <PictureModal
+      {/* <PictureModal
         visible={currentVisibleModal === 'picture'}
         onClose={handleCloseModal}
         onCreate={onCreate}
@@ -39,13 +48,13 @@ export function CreateMealOptions({ disabled = false, onCreate }: CreateMealOpti
         icon={MicIcon}
         label="Áudio"
         disabled={disabled}
-        onPress={() => handleOpenModal("audio")}
+        onPress={() => handleOpenModal(Modal.AUDIO)}
       />
       <OptionButton
         icon={CameraIcon}
         label="Foto"
         disabled={disabled}
-        onPress={() => handleOpenModal("picture")}
+        onPress={() => handleOpenModal(Modal.PICTURE)}
       />
     </View>
   );

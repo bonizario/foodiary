@@ -4,8 +4,9 @@ import { View } from "react-native";
 import { useAccount } from "@/app/hooks/queries/use-account";
 
 import { GoalStats } from "@/ui/components/goal-stats";
-import { styles } from "@/ui/screens/home/components/date-switcher/styles";
 import { useHomeContext } from "@/ui/screens/home/context/use-home-context";
+
+import { styles } from "./styles";
 
 export function CurrentGoal() {
   const { meals, isFetching } = useHomeContext();

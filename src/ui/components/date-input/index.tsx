@@ -6,11 +6,12 @@ import { useState } from "react";
 import { Platform, TouchableOpacity, View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
-import { styles } from "@/ui/components/date-input/styles";
 import { inputStyles } from "@/ui/components/input/styles";
 import { theme } from "@/ui/styles/theme";
 
 import { formatDate } from "@/shared/functions/format-date";
+
+import { styles } from "./styles";
 
 export type DateInputProps = {
   value: Date;

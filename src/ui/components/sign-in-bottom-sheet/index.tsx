@@ -12,8 +12,9 @@ import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
 import { FormGroup } from "@/ui/components/form-group";
 import { Input } from "@/ui/components/input";
-import { styles } from "@/ui/components/sign-in-bottom-sheet/styles";
 import { useSignInBottomSheetController } from "@/ui/components/sign-in-bottom-sheet/use-sign-in-bottom-sheet-controller";
+
+import { styles } from "./styles";
 
 export type SignInBottomSheetRef = {
   open: () => void;
