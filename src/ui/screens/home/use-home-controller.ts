@@ -5,7 +5,7 @@ import { useMeals } from "@/app/hooks/queries/use-meals";
 import { useSafeArea } from "@/ui/hooks/use-safe-area";
 
 export function useHomeController() {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(() => new Date());
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { top, bottom } = useSafeArea();
 

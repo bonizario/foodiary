@@ -7,5 +7,5 @@ type HomeProviderProps = HomeContextValue & {
 };
 
 export function HomeProvider({ children, ...contextValue }: HomeProviderProps) {
-  return <HomeContext.Provider value={contextValue}>{children}</HomeContext.Provider>;
+  return <HomeContext value={contextValue}>{children}</HomeContext>;
 }

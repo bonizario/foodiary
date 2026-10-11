@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { KeyboardAvoidingView, Platform, View } from "react-native";
 
@@ -16,7 +17,6 @@ export function Onboarding() {
   const form = useForm<OnboardingSchemaInput, unknown, OnboardingSchemaOutput>({
     resolver: zodResolver(onboardingSchema),
     defaultValues: {
-      birthdate: new Date(),
       height: "",
       weight: "",
       account: {
@@ -27,6 +27,10 @@ export function Onboarding() {
       },
     },
   });
+
+  useEffect(() => {
+    form.setValue("birthdate", new Date());
+  }, [form]);
 
   return (
     <FormProvider {...form}>

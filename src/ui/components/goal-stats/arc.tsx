@@ -7,7 +7,6 @@ type ArcProps = {
   color: string;
   radius: number;
   strokeWidth: number;
-  baseStrokeColor?: string;
   style?: StyleProp<ViewStyle>;
 };
 

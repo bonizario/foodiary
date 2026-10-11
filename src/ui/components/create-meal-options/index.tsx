@@ -1,19 +1,15 @@
-import { CameraIcon, LucideIcon, MicIcon } from "lucide-react-native";
+import { CameraIcon, MicIcon, type LucideIcon } from "lucide-react-native";
 import { useState } from "react";
 import { Platform, Pressable, View } from "react-native";
 
+import { MealInputType } from "@/app/constants/meal";
+
 import { AppText } from "@/ui/components/app-text";
 import { AudioModal } from "@/ui/components/audio-modal";
+import { PictureModal } from "@/ui/components/picture-modal";
 import { theme } from "@/ui/styles/theme";
 
 import { styles } from "./styles";
-
-const Modal = {
-  AUDIO: "AUDIO",
-  PICTURE: "PICTURE",
-} as const;
-
-type Modal = (typeof Modal)[keyof typeof Modal];
 
 type CreateMealOptionsProps = {
   disabled?: boolean;
@@ -21,10 +17,10 @@ type CreateMealOptionsProps = {
 };
 
 export function CreateMealOptions({ disabled = false, onCreate }: CreateMealOptionsProps) {
-  const [currentVisibleModal, setCurrentVisibleModal] = useState<Modal | null>("AUDIO");
+  const [currentVisibleModal, setCurrentVisibleModal] = useState<MealInputType | null>(null);
 
-  function handleOpenModal(modal: Modal) {
-    setCurrentVisibleModal(modal);
+  function handleOpenModal(inputType: MealInputType) {
+    setCurrentVisibleModal(inputType);
   }
 
   function handleCloseModal() {
@@ -34,40 +30,39 @@ export function CreateMealOptions({ disabled = false, onCreate }: CreateMealOpti
   return (
     <View style={styles.container}>
       <AudioModal
-        visible={currentVisibleModal === Modal.AUDIO}
+        visible={currentVisibleModal === MealInputType.AUDIO}
         onClose={handleCloseModal}
         onCreate={onCreate}
       />
-      {/* <PictureModal
-        visible={currentVisibleModal === 'picture'}
+      <PictureModal
+        visible={currentVisibleModal === MealInputType.PICTURE}
         onClose={handleCloseModal}
         onCreate={onCreate}
-      /> */}
-
+      />
       <OptionButton
         icon={MicIcon}
         label="Áudio"
         disabled={disabled}
-        onPress={() => handleOpenModal(Modal.AUDIO)}
+        onPress={() => handleOpenModal(MealInputType.AUDIO)}
       />
       <OptionButton
         icon={CameraIcon}
         label="Foto"
         disabled={disabled}
-        onPress={() => handleOpenModal(Modal.PICTURE)}
+        onPress={() => handleOpenModal(MealInputType.PICTURE)}
       />
     </View>
   );
 }
 
 type OptionButtonProps = {
+  disabled: boolean;
   icon: LucideIcon;
   label: string;
   onPress: () => void;
-  disabled?: boolean;
 };
 
-function OptionButton({ icon: Icon, label, disabled, onPress }: OptionButtonProps) {
+function OptionButton({ disabled, icon: Icon, label, onPress }: OptionButtonProps) {
   return (
     <View style={styles.buttonWrapper}>
       <Pressable

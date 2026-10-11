@@ -4,7 +4,6 @@ import {
   BottomSheetTextInput,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import type { Ref } from "react";
 import { Controller } from "react-hook-form";
 import { View } from "react-native";
 
@@ -12,16 +11,15 @@ import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
 import { FormGroup } from "@/ui/components/form-group";
 import { Input } from "@/ui/components/input";
-import { useSignInBottomSheetController } from "@/ui/components/sign-in-bottom-sheet/use-sign-in-bottom-sheet-controller";
 
 import { styles } from "./styles";
-
-export type SignInBottomSheetRef = {
-  open: () => void;
-};
+import {
+  useSignInBottomSheetController,
+  type SignInBottomSheetRef,
+} from "./use-sign-in-bottom-sheet-controller";
 
 type SignInBottomSheetProps = {
-  ref: Ref<SignInBottomSheetRef>;
+  ref: SignInBottomSheetRef;
 };
 
 export function SignInBottomSheet({ ref }: SignInBottomSheetProps) {

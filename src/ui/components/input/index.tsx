@@ -1,8 +1,9 @@
 import { useState, type ComponentType, type Ref } from "react";
 import { TextInput, type BlurEvent, type FocusEvent, type TextInputProps } from "react-native";
 
-import { inputStyles } from "@/ui/components/input/styles";
 import { theme } from "@/ui/styles/theme";
+
+import { inputStyles } from "./styles";
 
 type BaseTextInputProps = Omit<TextInputProps, "readOnly">;
 

@@ -9,7 +9,7 @@ import { Alert } from "react-native";
 import { MealStatus } from "@/app/constants/meal";
 import type { AppStackNavigationProps } from "@/app/navigation/app-stack";
 
-function useMeal(_mealId: string) {
+function useMeal(mealId: string) {
   return {
     meal: {
       id: "id",
@@ -46,14 +46,14 @@ export function useAudioModalController({ onClose, onCreate }: UseAudioModalCont
   const { navigate } = useNavigation<AppStackNavigationProps>();
   const queryClient = useQueryClient();
 
-  const memoizedOnClose = useRef(onClose);
+  const memoizedOnCloseRef = useRef(onClose);
   useLayoutEffect(() => {
-    memoizedOnClose.current = onClose;
+    memoizedOnCloseRef.current = onClose;
   }, [onClose]);
 
-  const memoizedOnCreate = useRef(onCreate);
+  const memoizedOnCreateRef = useRef(onCreate);
   useLayoutEffect(() => {
-    memoizedOnCreate.current = onCreate;
+    memoizedOnCreateRef.current = onCreate;
   }, [onCreate]);
 
   const { createMeal, isLoading: isCreatingMeal, createdMealId } = useCreateMeal();
@@ -71,11 +71,7 @@ export function useAudioModalController({ onClose, onCreate }: UseAudioModalCont
     setState("recorded");
   }, [audioRecorder]);
 
-  const handleTryAgain = () => {
-    setState("idle");
-  };
-
-  const handleConfirm = async () => {
+  const handleConfirm = useCallback(async () => {
     if (!audioUri) {
       return;
     }
@@ -87,7 +83,11 @@ export function useAudioModalController({ onClose, onCreate }: UseAudioModalCont
 
       Alert.alert("Oops!", "Ocorreu um erro ao criar a sua refeição! Tente novamente.");
     }
-  };
+  }, [audioUri, createMeal]);
+
+  const handleTryAgain = useCallback(() => {
+    setState("idle");
+  }, []);
 
   useEffect(() => {
     if (meal?.status === MealStatus.FAILED) {
@@ -95,8 +95,8 @@ export function useAudioModalController({ onClose, onCreate }: UseAudioModalCont
     }
 
     if (meal?.status === MealStatus.SUCCESS) {
-      memoizedOnClose.current();
-      memoizedOnCreate.current?.();
+      memoizedOnCloseRef.current();
+      memoizedOnCreateRef.current?.();
       queryClient.invalidateQueries({ queryKey: ["meals"] });
       // navigate("MealDetails", { mealId: meal.id });
     }

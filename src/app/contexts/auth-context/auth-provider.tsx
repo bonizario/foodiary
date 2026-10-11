@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import * as SplashScreen from "expo-splash-screen";
-import { useCallback, useLayoutEffect, useState, type ReactElement } from "react";
+import { useCallback, useLayoutEffect, useMemo, useState, type ReactElement } from "react";
 
 import { AuthContext } from "@/app/contexts/auth-context";
 import { useAccount } from "@/app/hooks/queries/use-account";
@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: ReactElement }) {
   }, [queryClient, forceRender]);
 
   const setupAuth = useCallback(
-    async (tokens: AuthTokensManager.Tokens) => {
+    async (tokens: AuthTokensManager.Tokens): Promise<void> => {
       Service.setAccessToken(tokens.accessToken);
 
       Service.setRefreshTokenHandler(async () => {
@@ -76,6 +76,17 @@ export function AuthProvider({ children }: { children: ReactElement }) {
     [setupAuth],
   );
 
+  const contextValue = useMemo(
+    () => ({
+      signedIn: !!account,
+      signedUp,
+      signIn,
+      signUp,
+      signOut,
+    }),
+    [account, signIn, signOut, signUp, signedUp],
+  );
+
   useLayoutEffect(() => {
     async function load() {
       const tokens = await AuthTokensManager.load();
@@ -96,17 +107,5 @@ export function AuthProvider({ children }: { children: ReactElement }) {
     return null;
   }
 
-  return (
-    <AuthContext.Provider
-      value={{
-        signedIn: !!account,
-        signedUp,
-        signIn,
-        signUp,
-        signOut,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext value={contextValue}>{children}</AuthContext>;
 }

@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { useCallback, useState, type ReactNode } from "react";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
 
 import type { AuthStackNavigationProps } from "@/app/navigation/auth-stack";
 
@@ -41,15 +41,14 @@ export function OnboardingProvider({ children }: OnboardingProviderProps) {
     setCurrentStepIndex(previousStepIndex);
   }, [currentStepIndex, goBack]);
 
-  return (
-    <OnboardingContext.Provider
-      value={{
-        currentStepIndex,
-        nextStep,
-        previousStep,
-      }}
-    >
-      {children}
-    </OnboardingContext.Provider>
+  const contextValue = useMemo(
+    () => ({
+      currentStepIndex,
+      nextStep,
+      previousStep,
+    }),
+    [currentStepIndex, nextStep, previousStep],
   );
+
+  return <OnboardingContext value={contextValue}>{children}</OnboardingContext>;
 }

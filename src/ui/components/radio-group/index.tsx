@@ -1,4 +1,4 @@
-import { createContext, use, type ReactNode } from "react";
+import { createContext, use, useMemo, type ReactNode } from "react";
 import { TouchableOpacity, View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
@@ -36,11 +36,15 @@ export function RadioGroup({
   error = false,
 }: RadioGroupProps) {
   const isHorizontal = orientation === "horizontal";
+  const contextValue = useMemo(
+    () => ({ error, isHorizontal, onChangeValue, value }),
+    [error, isHorizontal, onChangeValue, value],
+  );
 
   return (
-    <RadioGroupContext.Provider value={{ value, onChangeValue, isHorizontal, error }}>
+    <RadioGroupContext value={contextValue}>
       <View style={[styles.container, isHorizontal && styles.containerHorizontal]}>{children}</View>
-    </RadioGroupContext.Provider>
+    </RadioGroupContext>
   );
 }
 
@@ -60,9 +64,10 @@ const RadioGroupItemContext = createContext({ isSelected: false });
 function RadioGroupItem({ children, value }: RadioGroupItemProps) {
   const { value: selectedValue, onChangeValue, isHorizontal, error } = use(RadioGroupContext);
   const isSelected = value === selectedValue;
+  const contextValue = useMemo(() => ({ isSelected }), [isSelected]);
 
   return (
-    <RadioGroupItemContext.Provider value={{ isSelected }}>
+    <RadioGroupItemContext value={contextValue}>
       <TouchableOpacity
         style={[
           styles.item,
@@ -75,7 +80,7 @@ function RadioGroupItem({ children, value }: RadioGroupItemProps) {
       >
         {children}
       </TouchableOpacity>
-    </RadioGroupItemContext.Provider>
+    </RadioGroupItemContext>
   );
 }
 

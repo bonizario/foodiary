@@ -2,9 +2,9 @@ import { useMemo } from "react";
 import { View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
-import { Arc } from "@/ui/components/goal-stats/arc";
 import { theme } from "@/ui/styles/theme";
 
+import { Arc } from "./arc";
 import { styles } from "./styles";
 
 type MacroProgress = {
