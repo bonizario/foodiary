@@ -1,4 +1,5 @@
-import { create, isAxiosError } from "axios";
+import axios, { create, isAxiosError } from "axios";
+import base64 from "react-native-base64";
 
 import { env } from "@/app/config/env";
 
@@ -53,7 +54,44 @@ export abstract class Service {
     );
   }
 
+  public static async uploadPresignedPost({
+    uploadSignature,
+    file,
+  }: Service.UploadPresignedPostParams): Promise<void> {
+    const decodedSignature = base64.decode(uploadSignature);
+    const { url, fields } = JSON.parse(decodedSignature) as Service.DecodedUploadSignature;
+    const form = new FormData();
+
+    for (const [key, value] of Object.entries(fields)) {
+      form.append(key, value);
+    }
+
+    form.append("file", file);
+
+    await axios.post(url, form, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  }
+
   private static sleep(ms: number): Promise<void> {
     return new Promise<void>((resolve) => setTimeout(resolve, ms));
   }
+}
+
+export namespace Service {
+  export type UploadPresignedPostParams = {
+    uploadSignature: string;
+    file: {
+      name: string;
+      type: string;
+      uri: string;
+    };
+  };
+
+  export type DecodedUploadSignature = {
+    url: string;
+    fields: Record<string, string>;
+  };
 }

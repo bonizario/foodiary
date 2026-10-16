@@ -1,35 +1,13 @@
-// import { useCreateMeal } from '@app/hooks/mutations/useCreateMeal';
-// import { useMeal } from '@app/hooks/queries/useMeal';
 import { useNavigation } from "@react-navigation/native";
 import { useQueryClient } from "@tanstack/react-query";
 import { AudioModule, RecordingPresets, setAudioModeAsync, useAudioRecorder } from "expo-audio";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
 
 import { MealStatus } from "@/app/constants/meal";
+import { useCreateMeal } from "@/app/hooks/mutations/use-create-meal";
+import { useMeal } from "@/app/hooks/queries/use-meal";
 import type { AppStackNavigationProps } from "@/app/navigation/app-stack";
-
-function useMeal(mealId: string) {
-  return {
-    meal: {
-      id: "id",
-      status: "SUCCESS",
-    },
-    isLoading: false,
-    isProcessing: false,
-  };
-}
-
-function useCreateMeal() {
-  return {
-    createMeal: async (audioUri: string) => {
-      // Simulate meal creation
-      return new Promise<void>((resolve) => setTimeout(resolve, 1000));
-    },
-    isLoading: false,
-    createdMealId: "id",
-  };
-}
 
 export type AudioModalState = "idle" | "recording" | "recorded";
 
@@ -40,36 +18,18 @@ type UseAudioModalControllerParams = {
 
 export function useAudioModalController({ onClose, onCreate }: UseAudioModalControllerParams) {
   const [state, setState] = useState<AudioModalState>("idle");
+
   const [audioUri, setAudioUri] = useState<string | null>(null);
+
   const audioRecorder = useAudioRecorder(RecordingPresets.LOW_QUALITY);
 
   const { navigate } = useNavigation<AppStackNavigationProps>();
+
   const queryClient = useQueryClient();
 
-  const memoizedOnCloseRef = useRef(onClose);
-  useLayoutEffect(() => {
-    memoizedOnCloseRef.current = onClose;
-  }, [onClose]);
+  const { createdMealId, createMeal, isCreatingMeal } = useCreateMeal();
 
-  const memoizedOnCreateRef = useRef(onCreate);
-  useLayoutEffect(() => {
-    memoizedOnCreateRef.current = onCreate;
-  }, [onCreate]);
-
-  const { createMeal, isLoading: isCreatingMeal, createdMealId } = useCreateMeal();
-  const { meal, isLoading: isLoadingMeal, isProcessing: isProcessingMeal } = useMeal(createdMealId);
-
-  const handleStartRecording = async () => {
-    await audioRecorder.prepareToRecordAsync();
-    audioRecorder.record();
-    setState("recording");
-  };
-
-  const handleStopRecording = useCallback(async () => {
-    await audioRecorder.stop();
-    setAudioUri(audioRecorder.uri);
-    setState("recorded");
-  }, [audioRecorder]);
+  const { meal, isFetchingMeal, isProcessingMeal } = useMeal(createdMealId);
 
   const handleConfirm = useCallback(async () => {
     if (!audioUri) {
@@ -80,30 +40,44 @@ export function useAudioModalController({ onClose, onCreate }: UseAudioModalCont
       await createMeal(audioUri);
     } catch (error) {
       console.error(error);
-
       Alert.alert("Oops!", "Ocorreu um erro ao criar a sua refeição! Tente novamente.");
     }
   }, [audioUri, createMeal]);
+
+  const handleStartRecording = useCallback(async () => {
+    await audioRecorder.prepareToRecordAsync();
+    audioRecorder.record();
+    setState("recording");
+  }, [audioRecorder]);
+
+  const handleStopRecording = useCallback(async () => {
+    await audioRecorder.stop();
+    setAudioUri(audioRecorder.uri);
+    setState("recorded");
+  }, [audioRecorder]);
 
   const handleTryAgain = useCallback(() => {
     setState("idle");
   }, []);
 
-  useEffect(() => {
-    if (meal?.status === MealStatus.FAILED) {
-      Alert.alert("Oops!", "Ocorreu um erro ao criar a sua refeição! Tente novamente!");
-    }
+  useEffect(
+    function handleMealStatusChange() {
+      if (meal?.status === MealStatus.FAILED) {
+        Alert.alert("Oops!", "Ocorreu um erro ao criar a sua refeição! Tente novamente!");
+      }
 
-    if (meal?.status === MealStatus.SUCCESS) {
-      memoizedOnCloseRef.current();
-      memoizedOnCreateRef.current?.();
-      queryClient.invalidateQueries({ queryKey: ["meals"] });
-      // navigate("MealDetails", { mealId: meal.id });
-    }
-  }, [meal?.status, meal?.id, navigate, queryClient]);
+      if (meal?.status === MealStatus.SUCCESS) {
+        onClose();
+        onCreate?.();
+        queryClient.invalidateQueries({ queryKey: ["meals"] });
+        navigate("MealDetails", { mealId: meal.id });
+      }
+    },
+    [meal?.id, meal?.status, navigate, onClose, onCreate, queryClient],
+  );
 
   useEffect(() => {
-    async function load() {
+    async function requestMicrophonePermission() {
       const status = await AudioModule.requestRecordingPermissionsAsync();
 
       if (!status.granted) {
@@ -113,12 +87,12 @@ export function useAudioModalController({ onClose, onCreate }: UseAudioModalCont
       setAudioModeAsync({ allowsRecording: true, playsInSilentMode: true });
     }
 
-    void load();
+    void requestMicrophonePermission();
   }, []);
 
   return {
     audioUri,
-    isLoading: isCreatingMeal || isLoadingMeal || isProcessingMeal,
+    isLoading: isCreatingMeal || isFetchingMeal || isProcessingMeal,
     state,
     handleConfirm,
     handleStartRecording,

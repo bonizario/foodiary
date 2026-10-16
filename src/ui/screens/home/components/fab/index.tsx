@@ -1,6 +1,12 @@
-import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from "@gorhom/bottom-sheet";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetModalProvider,
+  BottomSheetView,
+  type BottomSheetBackdropProps,
+} from "@gorhom/bottom-sheet";
 import { PlusIcon } from "lucide-react-native";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { View } from "react-native";
 
 import { AppText } from "@/ui/components/app-text";
@@ -15,9 +21,25 @@ export function Fab() {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const { bottom } = useSafeArea();
 
-  const handleOpenBottomSheet = () => {
+  const handleOpenBottomSheet = useCallback(() => {
     bottomSheetModalRef.current?.present();
-  };
+  }, []);
+
+  const handleCloseBottomSheet = useCallback(() => {
+    bottomSheetModalRef.current?.dismiss();
+  }, []);
+
+  const renderBackdrop = useCallback(
+    (props: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        pressBehavior="close"
+      />
+    ),
+    [],
+  );
 
   return (
     <>
@@ -27,13 +49,17 @@ export function Fab() {
         </Button>
       </View>
       <BottomSheetModalProvider>
-        <BottomSheetModal ref={bottomSheetModalRef} style={styles.bottomSheet}>
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          style={styles.bottomSheet}
+          backdropComponent={renderBackdrop}
+        >
           <BottomSheetView style={[styles.content, { paddingBottom: bottom }]}>
             <AppText style={styles.title} fontSize="lg" weight="semibold">
               Cadastre sua refeição
             </AppText>
 
-            <CreateMealOptions />
+            <CreateMealOptions onCreate={handleCloseBottomSheet} />
           </BottomSheetView>
         </BottomSheetModal>
       </BottomSheetModalProvider>

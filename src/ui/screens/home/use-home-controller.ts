@@ -19,7 +19,7 @@ export function useHomeController() {
 
   const handleNextDay = useCallback(() => {
     setCurrentDate((prevDate) => {
-      const newDate = new Date();
+      const newDate = new Date(prevDate);
       newDate.setDate(prevDate.getDate() + 1);
       return newDate;
     });
@@ -27,7 +27,7 @@ export function useHomeController() {
 
   const handlePreviousDay = useCallback(() => {
     setCurrentDate((prevDate) => {
-      const newDate = new Date();
+      const newDate = new Date(prevDate);
       newDate.setDate(prevDate.getDate() - 1);
       return newDate;
     });

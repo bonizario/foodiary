@@ -1,5 +1,5 @@
 import { CameraIcon, MicIcon, type LucideIcon } from "lucide-react-native";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Platform, Pressable, View } from "react-native";
 
 import { MealInputType } from "@/app/constants/meal";
@@ -19,13 +19,13 @@ type CreateMealOptionsProps = {
 export function CreateMealOptions({ disabled = false, onCreate }: CreateMealOptionsProps) {
   const [currentVisibleModal, setCurrentVisibleModal] = useState<MealInputType | null>(null);
 
-  function handleOpenModal(inputType: MealInputType) {
+  const handleOpenModal = useCallback((inputType: MealInputType) => {
     setCurrentVisibleModal(inputType);
-  }
+  }, []);
 
-  function handleCloseModal() {
+  const handleCloseModal = useCallback(() => {
     setCurrentVisibleModal(null);
-  }
+  }, []);
 
   return (
     <View style={styles.container}>

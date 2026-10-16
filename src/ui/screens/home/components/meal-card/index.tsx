@@ -51,8 +51,7 @@ export function MealCard({ meal }: MealCardProps) {
 
       <View style={styles.wrapper}>
         <Pressable
-          // onPress={() => navigate("MealDetails", { mealId: meal.id })}
-          onPress={() => {}}
+          onPress={() => navigate("MealDetails", { mealId: meal.id })}
           disabled={isFetching}
           android_ripple={{ color: "rgba(0, 0, 0, 0.1)", foreground: true }}
           style={({ pressed }) => [

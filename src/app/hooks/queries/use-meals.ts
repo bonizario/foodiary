@@ -6,9 +6,9 @@ import { toLocalDateString } from "@/shared/functions/to-local-date-string";
 
 export function useMeals(date: Date) {
   return useQuery({
-    queryKey: ["account", toLocalDateString(date)],
+    queryKey: ["meals", toLocalDateString(date)],
     queryFn: async () => {
-      const { meals } = await MealsService.getMealsByDate(date);
+      const { meals } = await MealsService.listByDate(date);
       return meals;
     },
     staleTime: Infinity,
