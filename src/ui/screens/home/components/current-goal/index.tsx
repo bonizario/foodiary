@@ -10,7 +10,8 @@ import { styles } from "./styles";
 
 export function CurrentGoal() {
   const { meals, isFetching } = useHomeContext();
-  const { data: account } = useAccount();
+
+  const { account } = useAccount();
 
   const summary = useMemo(
     () =>

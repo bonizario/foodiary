@@ -10,7 +10,7 @@ import { theme } from "@/ui/styles/theme";
 import { styles } from "./styles";
 
 export function UserHeader() {
-  const { data: account } = useAccount();
+  const { account } = useAccount();
 
   return (
     <View style={styles.container}>

@@ -6,11 +6,16 @@ type UseAccountOptions = {
   enabled?: boolean;
 };
 
-export function useAccount(options?: UseAccountOptions) {
-  return useQuery({
+export function useAccount({ enabled }: UseAccountOptions = { enabled: true }) {
+  const { data, refetch } = useQuery({
     queryKey: ["account"],
     queryFn: AccountsService.getMe,
     staleTime: Infinity,
-    enabled: options?.enabled ?? true,
+    enabled,
   });
+
+  return {
+    account: data,
+    refetchAccount: refetch,
+  };
 }

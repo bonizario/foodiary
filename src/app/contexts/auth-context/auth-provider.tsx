@@ -17,7 +17,7 @@ export function AuthProvider({ children }: { children: ReactElement }) {
 
   const queryClient = useQueryClient();
 
-  const { data: account, refetch: loadAccount } = useAccount({ enabled: false });
+  const { account, refetchAccount } = useAccount({ enabled: false });
 
   const forceRender = useForceRender();
 
@@ -50,11 +50,11 @@ export function AuthProvider({ children }: { children: ReactElement }) {
         }
       });
 
-      await loadAccount();
+      await refetchAccount();
       void SplashScreen.hideAsync();
       setIsReady(true);
     },
-    [loadAccount, signOut],
+    [refetchAccount, signOut],
   );
 
   const signIn = useCallback(
@@ -101,7 +101,7 @@ export function AuthProvider({ children }: { children: ReactElement }) {
     }
 
     void load();
-  }, [loadAccount, setupAuth]);
+  }, [setupAuth]);
 
   if (!isReady) {
     return null;

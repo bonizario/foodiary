@@ -12,7 +12,7 @@ const PROCESSING_STATUSES: MealStatus[] = [
 const REFETCH_INTERVAL = 2_000;
 
 export function useMeal(mealId?: string) {
-  const { data: meal, isFetching: isFetchingMeal } = useQuery({
+  const { data, isFetching } = useQuery({
     enabled: !!mealId,
     queryKey: ["meal", mealId],
     queryFn: async () => {
@@ -34,7 +34,11 @@ export function useMeal(mealId?: string) {
     staleTime: Infinity,
   });
 
-  const isProcessingMeal = !!(meal && PROCESSING_STATUSES.includes(meal.status));
+  const isProcessingMeal = !!(data && PROCESSING_STATUSES.includes(data.status));
 
-  return { meal, isFetchingMeal, isProcessingMeal };
+  return {
+    isFetchingMeal: isFetching,
+    isProcessingMeal,
+    meal: data,
+  };
 }

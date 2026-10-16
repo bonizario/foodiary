@@ -9,7 +9,7 @@ export function useHomeController() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { top, bottom } = useSafeArea();
 
-  const { data: meals = [], isLoading, isFetching, refetch: refetchMeals } = useMeals(currentDate);
+  const { isFetchingMeals, isLoadingMeals, meals, refetchMeals } = useMeals(currentDate);
 
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);
@@ -37,8 +37,8 @@ export function useHomeController() {
     top,
     bottom,
     currentDate,
-    isFetching: isFetching && !isRefreshing,
-    isLoading,
+    isFetching: isFetchingMeals && !isRefreshing,
+    isLoading: isLoadingMeals,
     isRefreshing,
     meals,
     handleRefresh,

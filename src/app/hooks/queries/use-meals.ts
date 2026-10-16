@@ -5,7 +5,7 @@ import { MealsService } from "@/app/services/meals-service";
 import { toLocalDateString } from "@/shared/functions/to-local-date-string";
 
 export function useMeals(date: Date) {
-  return useQuery({
+  const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["meals", toLocalDateString(date)],
     queryFn: async () => {
       const { meals } = await MealsService.listByDate(date);
@@ -14,4 +14,11 @@ export function useMeals(date: Date) {
     staleTime: Infinity,
     placeholderData: keepPreviousData,
   });
+
+  return {
+    isFetchingMeals: isFetching,
+    isLoadingMeals: isLoading,
+    meals: data ?? [],
+    refetchMeals: refetch,
+  };
 }

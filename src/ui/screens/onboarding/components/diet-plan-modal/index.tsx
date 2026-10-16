@@ -33,7 +33,7 @@ export function DietPlanModal() {
 
   const [visible, setVisible] = useState(signedUp);
 
-  const { data: account } = useAccount();
+  const { account } = useAccount();
 
   const handleClose = () => setVisible(false);
 
