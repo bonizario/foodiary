@@ -6,7 +6,14 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.white,
-    alignItems: "center",
-    justifyContent: "center",
+  },
+  food: {
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+  },
+  separator: {
+    marginHorizontal: 20,
+    height: 1,
+    backgroundColor: theme.colors.gray[400],
   },
 });

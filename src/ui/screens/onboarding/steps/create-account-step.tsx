@@ -1,5 +1,5 @@
 import { isAxiosError } from "axios";
-import { useRef, useState } from "react";
+import { useRef, useState, type ComponentRef } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Alert, View, type TextInput } from "react-native";
 
@@ -15,9 +15,9 @@ import type { OnboardingSchemaInput, OnboardingSchemaOutput } from "@/ui/screens
 export function CreateAccountStep() {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
-  const emailInputRef = useRef<TextInput>(null);
-  const passwordInputRef = useRef<TextInput>(null);
-  const confirmPasswordInputRef = useRef<TextInput>(null);
+  const emailInputRef = useRef<ComponentRef<typeof TextInput>>(null);
+  const passwordInputRef = useRef<ComponentRef<typeof TextInput>>(null);
+  const confirmPasswordInputRef = useRef<ComponentRef<typeof TextInput>>(null);
 
   const form = useFormContext<OnboardingSchemaInput, unknown, OnboardingSchemaOutput>();
 
@@ -141,7 +141,7 @@ export function CreateAccountStep() {
                   autoCapitalize="none"
                   autoCorrect={false}
                   returnKeyType="done"
-                  onSubmitEditing={handleSubmit}
+                  onSubmitEditing={() => handleSubmit()}
                   value={field.value}
                   onChangeText={field.onChange}
                   disabled={form.formState.isSubmitting}
@@ -154,7 +154,7 @@ export function CreateAccountStep() {
 
       <Step.Footer align="start">
         <Button
-          onPress={handleSubmit}
+          onPress={() => handleSubmit()}
           style={{ width: "100%" }}
           isLoading={form.formState.isSubmitting}
           disabled={isSubmitDisabled}

@@ -47,7 +47,7 @@ export function DietPlanModal() {
       transparent
       visible={visible}
     >
-      <StatusBar animated translucent barStyle="light-content" />
+      <StatusBar animated barStyle="light-content" />
 
       <View style={styles.container}>
         <SafeAreaProvider>

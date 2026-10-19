@@ -1,3 +1,4 @@
+import "react-native-reanimated";
 import {
   HostGrotesk_400Regular,
   HostGrotesk_500Medium,

@@ -40,9 +40,9 @@ export function PictureModal({ visible, onClose, onCreate }: PictureModalProps) 
       transparent
       visible={visible}
     >
-      <StatusBar animated translucent barStyle="light-content" />
+      <StatusBar animated barStyle="light-content" />
 
-      {isLoading && <ProcessingMealModal inputType={MealInputType.PICTURE} />}
+      {isLoading && <ProcessingMealModal inputType={MealInputType.IMAGE} />}
 
       {!isLoading && permission && (
         <View style={styles.container}>

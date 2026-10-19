@@ -10,7 +10,7 @@ export type MealStatus = (typeof MealStatus)[keyof typeof MealStatus];
 
 export const MealInputType = {
   AUDIO: "AUDIO",
-  PICTURE: "PICTURE",
+  IMAGE: "IMAGE",
 } as const;
 
 export type MealInputType = (typeof MealInputType)[keyof typeof MealInputType];
@@ -28,7 +28,7 @@ export type Meal = {
   id: string;
   status: MealStatus;
   inputType: MealInputType;
-  inputFileURL: string;
+  inputFileUrl: string;
   name: string;
   icon: string;
   foods: Food[];

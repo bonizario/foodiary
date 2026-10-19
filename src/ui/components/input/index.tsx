@@ -1,4 +1,4 @@
-import { useState, type ComponentType, type Ref } from "react";
+import { useState, type ComponentRef, type ComponentType, type Ref } from "react";
 import { TextInput, type BlurEvent, type FocusEvent, type TextInputProps } from "react-native";
 
 import { theme } from "@/ui/styles/theme";
@@ -11,7 +11,7 @@ type InputProps = BaseTextInputProps & {
   error?: boolean;
   disabled?: boolean;
   component?: ComponentType<TextInputProps>;
-  ref?: Ref<TextInput>;
+  ref?: Ref<ComponentRef<typeof TextInput>>;
   formatter?: (value: string) => string;
 };
 

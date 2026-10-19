@@ -1,21 +1,55 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { View } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { FlatList, View } from "react-native";
 
+import { useMeal } from "@/app/hooks/queries/use-meal";
 import type { AppStackRouteProps } from "@/app/navigation/app-stack";
 
 import { AppText } from "@/ui/components/app-text";
-import { Button } from "@/ui/components/button";
+import { Skeleton } from "@/ui/components/skeleton";
 
+import { Header } from "./components/header";
 import { styles } from "./styles";
 
 export function MealDetails() {
   const { params } = useRoute<AppStackRouteProps<"MealDetails">>();
-  const { goBack } = useNavigation();
+
+  const { meal, isFetchingMeal } = useMeal(params.mealId);
 
   return (
     <View style={styles.container}>
-      <Button onPress={goBack}>Go Back</Button>
-      <AppText>Meal: {params.mealId} </AppText>
+      <FlatList
+        data={meal?.foods ?? []}
+        ListHeaderComponent={<Header meal={meal} isLoading={isFetchingMeal} />}
+        ListEmptyComponent={
+          isFetchingMeal ? (
+            <>
+              <View style={styles.food}>
+                <Skeleton />
+              </View>
+              <View style={styles.separator} />
+              <View style={styles.food}>
+                <Skeleton />
+              </View>
+              <View style={styles.separator} />
+              <View style={styles.food}>
+                <Skeleton />
+              </View>
+              <View style={styles.separator} />
+              <View style={styles.food}>
+                <Skeleton />
+              </View>
+            </>
+          ) : undefined
+        }
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        renderItem={({ item: food }) => (
+          <View style={styles.food}>
+            <AppText>
+              {food.quantity} {food.name}
+            </AppText>
+          </View>
+        )}
+      />
     </View>
   );
 }

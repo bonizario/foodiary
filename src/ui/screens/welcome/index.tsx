@@ -9,13 +9,14 @@ import welcomeBg from "@/ui/assets/welcome-bg/image.jpg";
 import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";
 import { Logo } from "@/ui/components/logo";
-import { SignInBottomSheet, SignInBottomSheetRef } from "@/ui/components/sign-in-bottom-sheet";
+import { SignInBottomSheet } from "@/ui/components/sign-in-bottom-sheet";
+import type { SignInBottomSheetHandle } from "@/ui/components/sign-in-bottom-sheet/use-sign-in-bottom-sheet-controller";
 import { theme } from "@/ui/styles/theme";
 
 import { styles } from "./styles";
 
 export function Welcome() {
-  const signInBottomSheetRef = useRef<SignInBottomSheetRef>(null);
+  const signInBottomSheetRef = useRef<SignInBottomSheetHandle>(null);
 
   const navigation = useNavigation<AuthStackNavigationProps>();
 
@@ -25,6 +26,7 @@ export function Welcome() {
 
   return (
     <>
+      {/* Replace ImageBackground with View + Image */}
       <ImageBackground source={welcomeBg} resizeMode="cover" style={styles.container}>
         <SafeAreaView style={styles.content}>
           <Logo />

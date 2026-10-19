@@ -4,6 +4,7 @@ import {
   BottomSheetTextInput,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
+import type { Ref } from "react";
 import { Controller } from "react-hook-form";
 import { View } from "react-native";
 
@@ -15,11 +16,11 @@ import { Input } from "@/ui/components/input";
 import { styles } from "./styles";
 import {
   useSignInBottomSheetController,
-  type SignInBottomSheetRef,
+  type SignInBottomSheetHandle,
 } from "./use-sign-in-bottom-sheet-controller";
 
 type SignInBottomSheetProps = {
-  ref: SignInBottomSheetRef;
+  ref: Ref<SignInBottomSheetHandle>;
 };
 
 export function SignInBottomSheet({ ref }: SignInBottomSheetProps) {
@@ -70,7 +71,7 @@ export function SignInBottomSheet({ ref }: SignInBottomSheetProps) {
                     autoCapitalize="none"
                     autoComplete="current-password"
                     autoCorrect={false}
-                    onSubmitEditing={handleSubmit}
+                    onSubmitEditing={() => handleSubmit()}
                     returnKeyType="done"
                     secureTextEntry
                     spellCheck={false}
@@ -83,7 +84,7 @@ export function SignInBottomSheet({ ref }: SignInBottomSheetProps) {
               )}
             />
             <Button
-              onPress={handleSubmit}
+              onPress={() => handleSubmit()}
               isLoading={form.formState.isSubmitting}
               disabled={isSubmitDisabled}
             >

@@ -40,7 +40,7 @@ export function AudioModal({ visible, onClose, onCreate }: AudioModalProps) {
       transparent
       visible={visible}
     >
-      <StatusBar animated translucent barStyle="light-content" />
+      <StatusBar animated barStyle="light-content" />
 
       {isLoading && <ProcessingMealModal inputType={MealInputType.AUDIO} />}
 

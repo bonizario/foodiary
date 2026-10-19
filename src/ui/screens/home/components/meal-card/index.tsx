@@ -9,6 +9,8 @@ import { AppText } from "@/ui/components/app-text";
 import { useHomeContext } from "@/ui/screens/home/context/use-home-context";
 import { theme } from "@/ui/styles/theme";
 
+import { calculateMealMacros } from "@/shared/functions/calculate-meal-macros";
+
 import { styles } from "./styles";
 
 type MealCardProps = {
@@ -24,26 +26,7 @@ export function MealCard({ meal }: MealCardProps) {
     [meal.foods],
   );
 
-  const summary = useMemo(
-    () =>
-      (meal.foods ?? []).reduce(
-        (acc, food) => {
-          const proteinsCalories = food.proteins * 4;
-          const carbohydratesCalories = food.carbohydrates * 4;
-          const fatsCalories = food.fats * 9;
-          const totalCalories = Math.round(proteinsCalories + carbohydratesCalories + fatsCalories);
-
-          return {
-            calories: acc.calories + totalCalories,
-            proteins: acc.proteins + food.proteins,
-            carbohydrates: acc.carbohydrates + food.carbohydrates,
-            fats: acc.fats + food.fats,
-          };
-        },
-        { calories: 0, proteins: 0, carbohydrates: 0, fats: 0 },
-      ),
-    [meal.foods],
-  );
+  const macros = useMemo(() => calculateMealMacros(meal.foods), [meal.foods]);
 
   return (
     <View style={[styles.container, { opacity: isFetching ? 0.5 : 1 }]}>
@@ -78,14 +61,14 @@ export function MealCard({ meal }: MealCardProps) {
             <View style={styles.mealStatsRow}>
               <View style={styles.mealStat}>
                 <AppText color={theme.colors.support.tomato} weight="medium">
-                  {formatStat(summary.calories)}
+                  {macros.calories}
                 </AppText>
                 <AppText color={theme.colors.gray[700]}>Kcal</AppText>
               </View>
 
               <View style={styles.mealStat}>
                 <AppText color={theme.colors.support.teal} weight="medium">
-                  {formatStat(summary.proteins)}g
+                  {macros.proteins.grams}g
                 </AppText>
                 <AppText color={theme.colors.gray[700]}>Proteínas</AppText>
               </View>
@@ -94,14 +77,14 @@ export function MealCard({ meal }: MealCardProps) {
             <View style={styles.mealStatsRow}>
               <View style={styles.mealStat}>
                 <AppText color={theme.colors.support.yellow} weight="medium">
-                  {formatStat(summary.carbohydrates)}g
+                  {macros.carbohydrates.grams}g
                 </AppText>
                 <AppText color={theme.colors.gray[700]}>Carboidratos</AppText>
               </View>
 
               <View style={styles.mealStat}>
                 <AppText color={theme.colors.support.orange} weight="medium">
-                  {formatStat(summary.fats)}g
+                  {macros.fats.grams}g
                 </AppText>
                 <AppText color={theme.colors.gray[700]}>Gorduras</AppText>
               </View>
@@ -118,8 +101,4 @@ function formatTime(date: Date) {
   const minutes = String(date.getMinutes()).padStart(2, "0");
 
   return `${hours}h${minutes}`;
-}
-
-function formatStat(value: number) {
-  return Math.round(value * 100) / 100;
 }

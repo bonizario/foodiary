@@ -1,6 +1,6 @@
 import type { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useImperativeHandle, useRef, useState, type Ref } from "react";
+import { useImperativeHandle, useRef, useState, type ComponentRef, type Ref } from "react";
 import { useForm } from "react-hook-form";
 import { Alert, type TextInput } from "react-native";
 
@@ -10,13 +10,13 @@ import { useSafeArea } from "@/ui/hooks/use-safe-area";
 
 import { signInSchema } from "./schema";
 
-export type SignInBottomSheetRef = Ref<{ open: () => void }>;
+export type SignInBottomSheetHandle = { open: () => void };
 
-export function useSignInBottomSheetController(ref: SignInBottomSheetRef) {
+export function useSignInBottomSheetController(ref: Ref<SignInBottomSheetHandle>) {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const passwordInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<ComponentRef<typeof TextInput>>(null);
 
   const { bottom } = useSafeArea();
 

@@ -35,7 +35,7 @@ export function CreateMealOptions({ disabled = false, onCreate }: CreateMealOpti
         onCreate={onCreate}
       />
       <PictureModal
-        visible={currentVisibleModal === MealInputType.PICTURE}
+        visible={currentVisibleModal === MealInputType.IMAGE}
         onClose={handleCloseModal}
         onCreate={onCreate}
       />
@@ -49,7 +49,7 @@ export function CreateMealOptions({ disabled = false, onCreate }: CreateMealOpti
         icon={CameraIcon}
         label="Foto"
         disabled={disabled}
-        onPress={() => handleOpenModal(MealInputType.PICTURE)}
+        onPress={() => handleOpenModal(MealInputType.IMAGE)}
       />
     </View>
   );
