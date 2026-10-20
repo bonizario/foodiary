@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useRef } from "react";
-import { ImageBackground, TouchableOpacity, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import type { AuthStackNavigationProps } from "@/app/navigation/auth-stack";
@@ -26,8 +26,8 @@ export function Welcome() {
 
   return (
     <>
-      {/* Replace ImageBackground with View + Image */}
-      <ImageBackground source={welcomeBg} resizeMode="cover" style={styles.container}>
+      <View style={styles.container}>
+        <Image source={welcomeBg} style={styles.image} />
         <SafeAreaView style={styles.content}>
           <Logo />
           <View style={styles.ctaWrapper}>
@@ -52,7 +52,7 @@ export function Welcome() {
             </View>
           </View>
         </SafeAreaView>
-      </ImageBackground>
+      </View>
 
       <SignInBottomSheet ref={signInBottomSheetRef} />
     </>

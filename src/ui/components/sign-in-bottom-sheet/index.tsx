@@ -1,10 +1,12 @@
 import {
+  BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetModalProvider,
   BottomSheetTextInput,
   BottomSheetView,
+  type BottomSheetBackdropProps,
 } from "@gorhom/bottom-sheet";
-import type { Ref } from "react";
+import { useCallback, type Ref } from "react";
 import { Controller } from "react-hook-form";
 import { View } from "react-native";
 
@@ -27,9 +29,21 @@ export function SignInBottomSheet({ ref }: SignInBottomSheetProps) {
   const { bottom, bottomSheetModalRef, form, handleSubmit, isSubmitDisabled, passwordInputRef } =
     useSignInBottomSheetController(ref);
 
+  const renderBackdrop = useCallback(
+    (props: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        pressBehavior="close"
+      />
+    ),
+    [],
+  );
+
   return (
     <BottomSheetModalProvider>
-      <BottomSheetModal ref={bottomSheetModalRef}>
+      <BottomSheetModal ref={bottomSheetModalRef} backdropComponent={renderBackdrop}>
         <BottomSheetView style={[styles.container, { paddingBottom: bottom }]}>
           <AppText fontSize="3xl" weight="semibold" style={styles.heading}>
             Acesse sua conta

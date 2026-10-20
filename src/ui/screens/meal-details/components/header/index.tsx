@@ -3,7 +3,7 @@ import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { ChevronLeftIcon } from "lucide-react-native";
 import { useMemo } from "react";
-import { Image, StatusBar, StyleSheet, View } from "react-native";
+import { Image, StatusBar, View } from "react-native";
 
 import { MealInputType, type Meal } from "@/app/constants/meal";
 
@@ -38,7 +38,7 @@ export function Header({ isLoading, meal }: HeaderProps) {
       <View style={styles.container}>
         {isPictureInput && (
           <View style={styles.imageBackground}>
-            <Image source={{ uri: meal.inputFileUrl }} style={StyleSheet.absoluteFill} />
+            <Image source={{ uri: meal.inputFileUrl }} style={styles.image} />
             <LinearGradient
               colors={["rgba(0, 0, 0, 0.5)", "rgba(0, 0, 0, 0)"]}
               start={{ x: 0, y: 0 }}

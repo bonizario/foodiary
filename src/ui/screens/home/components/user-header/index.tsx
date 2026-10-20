@@ -15,6 +15,7 @@ export function UserHeader() {
   return (
     <View style={styles.container}>
       <View style={styles.userInfo}>
+        {/* TODO: Replace hardcoded avatar URL with user's profile picture */}
         <Image source={{ uri: "https://github.com/bonizario.png" }} style={styles.avatar} />
         <View style={styles.greetings}>
           <AppText color={theme.colors.gray[700]} fontSize="sm">

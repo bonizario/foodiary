@@ -10,6 +10,13 @@ export const styles = StyleSheet.create({
     height: 212,
     overflow: "hidden",
   },
+  image: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+  },
   imageOverlay: {
     paddingHorizontal: 12,
     height: "100%",
