@@ -44,5 +44,7 @@ export const styles = StyleSheet.create({
   },
   picker: {
     backgroundColor: theme.colors.white,
+    alignSelf: "center",
+    width: "100%",
   },
 });
