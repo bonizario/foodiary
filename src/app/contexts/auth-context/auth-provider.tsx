@@ -89,15 +89,20 @@ export function AuthProvider({ children }: { children: ReactElement }) {
 
   useLayoutEffect(() => {
     async function load() {
-      const tokens = await AuthTokensManager.load();
+      try {
+        const tokens = await AuthTokensManager.load();
 
-      if (!tokens) {
+        if (!tokens) {
+          return;
+        }
+
+        await setupAuth(tokens);
+      } catch {
+        // boot auth failed (e.g. network) - fall through to unauthenticated UI
+      } finally {
         setIsReady(true);
         void SplashScreen.hideAsync();
-        return;
       }
-
-      await setupAuth(tokens);
     }
 
     void load();

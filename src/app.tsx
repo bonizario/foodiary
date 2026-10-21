@@ -14,18 +14,18 @@ import { queryClient } from "@/app/lib/query-client";
 import { Navigation } from "@/app/navigation";
 
 export function App() {
-  const [isFontsLoaded] = useFonts({
+  const [isFontsLoaded, fontError] = useFonts({
     HostGrotesk_400Regular,
     HostGrotesk_500Medium,
     HostGrotesk_600SemiBold,
   });
 
-  if (!isFontsLoaded) {
+  if (!isFontsLoaded && !fontError) {
     return null;
   }
 
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
