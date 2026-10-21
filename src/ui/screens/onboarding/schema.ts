@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { ActivityLevel } from "@/app/constants/activity-level";
-import { BiologicalSex } from "@/app/constants/biological-sex";
-import { Goal } from "@/app/constants/goal";
+import { ActivityLevel } from "@/app/types/activity-level";
+import { BiologicalSex } from "@/app/types/biological-sex";
+import { Goal } from "@/app/types/goal";
 
 import { toLocalDateString } from "@/shared/functions/to-local-date-string";
 

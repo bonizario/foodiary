@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal, StatusBar, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-import { Goal } from "@/app/constants/goal";
+import { Goal } from "@/app/types/goal";
 import { useAuth } from "@/app/contexts/auth-context/use-auth";
 import { useAccount } from "@/app/hooks/queries/use-account";
 

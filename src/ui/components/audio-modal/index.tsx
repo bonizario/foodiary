@@ -2,7 +2,7 @@ import { XIcon } from "lucide-react-native";
 import { Modal, StatusBar, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-import { MealInputType } from "@/app/constants/meal";
+import { MealInputType } from "@/app/types/meal";
 
 import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";

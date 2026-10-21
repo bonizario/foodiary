@@ -1,7 +1,7 @@
 import { useVideoPlayer, VideoView } from "expo-video";
 import { View } from "react-native";
 
-import { MealInputType } from "@/app/constants/meal";
+import { MealInputType } from "@/app/types/meal";
 
 import { AppText } from "@/ui/components/app-text";
 import { Logo } from "@/ui/components/logo";

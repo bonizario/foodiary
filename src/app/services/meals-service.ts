@@ -1,7 +1,8 @@
-import type { Meal, SimplifiedMeal } from "@/app/constants/meal";
-import { Service } from "@/app/services/service";
+import type { Meal, SimplifiedMeal } from "@/app/types/meal";
 
 import { toLocalDateString } from "@/shared/functions/to-local-date-string";
+
+import { Service } from "./service";
 
 export class MealsService extends Service {
   public static getById = async (mealId: string): Promise<MealsService.GetByIdResponse> => {

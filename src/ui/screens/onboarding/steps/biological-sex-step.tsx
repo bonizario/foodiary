@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "lucide-react-native";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { BiologicalSex } from "@/app/constants/biological-sex";
+import { BiologicalSex } from "@/app/types/biological-sex";
 
 import { Button } from "@/ui/components/button";
 import { RadioGroup } from "@/ui/components/radio-group";

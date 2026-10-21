@@ -1,7 +1,8 @@
-import { ActivityLevel } from "@/app/constants/activity-level";
-import { BiologicalSex } from "@/app/constants/biological-sex";
-import { Goal } from "@/app/constants/goal";
-import { Service } from "@/app/services/service";
+import { ActivityLevel } from "@/app/types/activity-level";
+import { BiologicalSex } from "@/app/types/biological-sex";
+import { Goal } from "@/app/types/goal";
+
+import { Service } from "./service";
 
 export class AuthService extends Service {
   public static async signIn(

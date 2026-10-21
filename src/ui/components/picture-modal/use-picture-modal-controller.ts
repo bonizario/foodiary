@@ -4,7 +4,7 @@ import { CameraView, useCameraPermissions } from "expo-camera";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Alert } from "react-native";
 
-import { MealStatus } from "@/app/constants/meal";
+import { MealStatus } from "@/app/types/meal";
 import { useCreateMeal } from "@/app/hooks/mutations/use-create-meal";
 import { useMeal } from "@/app/hooks/queries/use-meal";
 import { AppStackNavigationProps } from "@/app/navigation/app-stack";

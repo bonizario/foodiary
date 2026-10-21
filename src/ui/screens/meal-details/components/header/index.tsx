@@ -5,7 +5,7 @@ import { ChevronLeftIcon } from "lucide-react-native";
 import { useMemo } from "react";
 import { Image, StatusBar, View } from "react-native";
 
-import { MealInputType, type Meal } from "@/app/constants/meal";
+import { MealInputType, type Meal } from "@/app/types/meal";
 
 import { AppText } from "@/ui/components/app-text";
 import { Button } from "@/ui/components/button";

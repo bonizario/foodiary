@@ -1,4 +1,4 @@
-import type { Food } from "@/app/constants/meal";
+import type { Food } from "@/app/types/meal";
 
 const CALORIES_PER_GRAM = {
   proteins: 4,

@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "lucide-react-native";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { Goal } from "@/app/constants/goal";
+import { Goal } from "@/app/types/goal";
 
 import { Button } from "@/ui/components/button";
 import { RadioGroup } from "@/ui/components/radio-group";

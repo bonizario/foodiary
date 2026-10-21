@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "lucide-react-native";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { ActivityLevel } from "@/app/constants/activity-level";
+import { ActivityLevel } from "@/app/types/activity-level";
 
 import { Button } from "@/ui/components/button";
 import { RadioGroup } from "@/ui/components/radio-group";

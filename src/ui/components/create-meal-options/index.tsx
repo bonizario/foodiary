@@ -2,7 +2,7 @@ import { CameraIcon, MicIcon, type LucideIcon } from "lucide-react-native";
 import { useCallback, useState } from "react";
 import { Platform, Pressable, View } from "react-native";
 
-import { MealInputType } from "@/app/constants/meal";
+import { MealInputType } from "@/app/types/meal";
 
 import { AppText } from "@/ui/components/app-text";
 import { AudioModal } from "@/ui/components/audio-modal";

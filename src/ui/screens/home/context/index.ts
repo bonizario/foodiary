@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import type { SimplifiedMeal } from "@/app/constants/meal";
+import type { SimplifiedMeal } from "@/app/types/meal";
 
 export type HomeContextValue = {
   currentDate: Date;
