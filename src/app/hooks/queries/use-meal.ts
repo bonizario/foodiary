@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { MealStatus } from "@/app/types/meal";
 import { MealsService } from "@/app/services/meals-service";
+import { MealStatus } from "@/app/types/meal";
 
 const PROCESSING_STATUSES: MealStatus[] = [
   MealStatus.UPLOADING,

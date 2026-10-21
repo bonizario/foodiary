@@ -2,8 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useMemo } from "react";
 import { Platform, Pressable, View } from "react-native";
 
-import type { SimplifiedMeal } from "@/app/types/meal";
 import type { AppStackNavigationProps } from "@/app/navigation/app-stack";
+import type { SimplifiedMeal } from "@/app/types/meal";
 
 import { AppText } from "@/ui/components/app-text";
 import { useHomeContext } from "@/ui/screens/home/context/use-home-context";

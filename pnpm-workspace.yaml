@@ -1,8 +1,6 @@
 allowBuilds:
   unrs-resolver: true
 minimumReleaseAge: 1440
-overrides:
-  "@react-native/metro-config": 0.86.3
 packages:
   - "packages/*"
 saveExact: true

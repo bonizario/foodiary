@@ -3,8 +3,8 @@ import { useRef, useState, type ComponentRef } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Alert, View, type TextInput } from "react-native";
 
-import { ErrorCode } from "@/app/types/error-code";
 import { useAuth } from "@/app/contexts/auth-context/use-auth";
+import { ErrorCode } from "@/app/types/error-code";
 
 import { Button } from "@/ui/components/button";
 import { FormGroup } from "@/ui/components/form-group";
